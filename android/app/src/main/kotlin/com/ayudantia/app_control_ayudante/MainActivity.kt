@@ -1,4 +1,4 @@
-package com.example.app_control_ayudante
+package com.ayudantia.app_control_ayudante
 
 import io.flutter.embedding.android.FlutterActivity
 
