@@ -54,7 +54,7 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
-    final authCtrl = Get.put(AuthController());
+    final authCtrl = Get.find<AuthController>();
     return Container(
       margin: EdgeInsets.only(top: 40),
       padding: EdgeInsets.symmetric(horizontal: 50),
@@ -101,11 +101,18 @@ class __FormState extends State<_Form> {
                       );
                       if (registroOk == true) {
                         //TODO: Conectar a nuestro socket server
-                        mostrarAlerta(
-                          context,
-                          'Usuario Registrado',
-                          '$registroOk',
+                        Get.offNamed('login');
+                        Get.snackbar(
+                          "Registro Exitoso",
+                          "Ya puese iniciar sesión",
+                          backgroundColor: Colors.white,
                         );
+                        // mostrarAlerta(
+                        //   context,
+                        //   'Usuario Registrado',
+                        //   '$registroOk',
+                        // );
+
                         // Navigator.pushReplacementNamed(context, 'usuarios');
                       } else {
                         //MOSTRAR ALERTA

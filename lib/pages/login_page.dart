@@ -53,7 +53,7 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
-    final authCtrl = Get.put(AuthController());
+    final authCtrl = Get.find<AuthController>();
     return Container(
       margin: EdgeInsets.only(top: 40),
       padding: EdgeInsets.symmetric(horizontal: 50),
@@ -92,6 +92,8 @@ class __FormState extends State<_Form> {
                           emailCtrl.text.trim(), passCtrl.text.trim());
                       if (loginOk) {
                         //TODO: Conectar a nuestro socket server
+                        authCtrl.dispose();
+                        // Get.delete()
                         Get.offNamed('home');
                         print('Correcto');
                       } else {
