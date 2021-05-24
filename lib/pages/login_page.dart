@@ -89,11 +89,12 @@ class __FormState extends State<_Form> {
                       //desaparecer teclado :D
                       FocusScope.of(context).unfocus();
                       final loginOk = await authCtrl.login(
-                          emailCtrl.text.trim(), passCtrl.text.trim());
+                        emailCtrl.text.trim(),
+                        passCtrl.text.trim(),
+                      );
                       if (loginOk) {
                         //TODO: Conectar a nuestro socket server
-                        authCtrl.dispose();
-                        // Get.delete()
+
                         Get.offNamed('home');
                         print('Correcto');
                       } else {

@@ -104,7 +104,7 @@ class __FormState extends State<_Form> {
                         Get.offNamed('login');
                         Get.snackbar(
                           "Registro Exitoso",
-                          "Ya puese iniciar sesión",
+                          "Ya puedes iniciar sesión",
                           backgroundColor: Colors.white,
                         );
                         // mostrarAlerta(
