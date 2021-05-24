@@ -1,9 +1,12 @@
-import 'package:app_control_ayudante/pages/ingreso_page.dart';
+import 'package:app_control_ayudante/controllers/auth_controller.dart';
+import 'package:app_control_ayudante/helpers/mostrar_alerta.dart';
+import 'package:app_control_ayudante/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_control_ayudante/widgets/widgets.dart';
+import 'package:get/get.dart';
 
-class RegistroPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +24,7 @@ class RegistroPage extends StatelessWidget {
                 Etiqueta(
                   mensaje: '¿Ya tienes cuenta?',
                   textVinculo: 'Ingresa ahora!',
-                  ruta: 'ingreso',
+                  ruta: 'login',
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 10),
@@ -51,7 +54,7 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
-    // final authService = Provider.of<AuthService>(context);
+    final authCtrl = Get.put(AuthController());
     return Container(
       margin: EdgeInsets.only(top: 40),
       padding: EdgeInsets.symmetric(horizontal: 50),
@@ -75,30 +78,46 @@ class __FormState extends State<_Form> {
             // keyboardType: TextInputType.emailAddress,
             textController: passCtrl,
           ),
-          Boton(text: 'Registrar', onPressed: () {}
-              /*(authService.registrando)
-                ? null
-                : () async {
-                    //desaparecer teclado :D
-                    FocusScope.of(context).unfocus();
-                    final registroOk = await authService.register(
-                      nameCtrl.text.trim(),
-                      emailCtrl.text.trim(),
-                      passCtrl.text.trim(),
-                    );
-                    if (registroOk == true) {
-                      //TODO: Conectar a nuestro socket server
-                      Navigator.pushReplacementNamed(context, 'usuarios');
-                    } else {
-                      //MOSTRAR ALERTA
-                      mostrarAlerta(
-                        context,
-                        'Registro Incorrecto',
-                        '$registroOk',
+          Obx(
+            () => Boton(
+              text: (authCtrl.registrando.value)
+                  ? CircularProgressIndicator()
+                  : Text(
+                      'Registrar',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                      ),
+                    ),
+              onPressed: (authCtrl.registrando.value)
+                  ? null
+                  : () async {
+                      //desaparecer teclado :D
+                      FocusScope.of(context).unfocus();
+                      final registroOk = await authCtrl.register(
+                        nameCtrl.text.trim(),
+                        emailCtrl.text.trim(),
+                        passCtrl.text.trim(),
                       );
-                    }
-                  },*/
-              )
+                      if (registroOk == true) {
+                        //TODO: Conectar a nuestro socket server
+                        mostrarAlerta(
+                          context,
+                          'Usuario Registrado',
+                          '$registroOk',
+                        );
+                        // Navigator.pushReplacementNamed(context, 'usuarios');
+                      } else {
+                        //MOSTRAR ALERTA
+                        mostrarAlerta(
+                          context,
+                          'Registro Incorrecto',
+                          '$registroOk',
+                        );
+                      }
+                    },
+            ),
+          )
         ],
       ),
     );

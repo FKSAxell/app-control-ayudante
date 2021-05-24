@@ -1,8 +1,12 @@
+import 'package:app_control_ayudante/controllers/auth_controller.dart';
+import 'package:app_control_ayudante/helpers/mostrar_alerta.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:app_control_ayudante/widgets/widgets.dart';
+import 'package:get/get.dart';
 
-class IngresoPage extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +24,7 @@ class IngresoPage extends StatelessWidget {
                 Etiqueta(
                   mensaje: '¿No tienes cuenta?',
                   textVinculo: 'Crea una ahora!',
-                  ruta: 'registro',
+                  ruta: 'register',
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 10),
@@ -49,7 +53,7 @@ class __FormState extends State<_Form> {
 
   @override
   Widget build(BuildContext context) {
-    // final authService = Provider.of<AuthService>(context);
+    final authCtrl = Get.put(AuthController());
     return Container(
       margin: EdgeInsets.only(top: 40),
       padding: EdgeInsets.symmetric(horizontal: 50),
@@ -68,27 +72,39 @@ class __FormState extends State<_Form> {
             // keyboardType: TextInputType.emailAddress,
             textController: passCtrl,
           ),
-          Boton(text: 'Ingresar', onPressed: () {}
-              /*(authService.autenticando)
-                ? null
-                : () async {
-                    //desaparecer teclado :D
-                    FocusScope.of(context).unfocus();
-                    final loginOk = await authService.login(
-                        emailCtrl.text.trim(), passCtrl.text.trim());
-                    if (loginOk) {
-                      //TODO: Conectar a nuestro socket server
-                      Navigator.pushReplacementNamed(context, 'usuarios');
-                    } else {
-                      //MOSTRAR ALERTA
-                      mostrarAlerta(
-                        context,
-                        'Login Incorrecto',
-                        'Revise sus credenciales nuevamente',
-                      );
-                    }
-                  },*/
-              )
+          Obx(
+            () => Boton(
+              text: (authCtrl.autenticando.value)
+                  ? CircularProgressIndicator()
+                  : Text(
+                      'Ingresar',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                      ),
+                    ),
+              onPressed: (authCtrl.autenticando.value)
+                  ? null
+                  : () async {
+                      //desaparecer teclado :D
+                      FocusScope.of(context).unfocus();
+                      final loginOk = await authCtrl.login(
+                          emailCtrl.text.trim(), passCtrl.text.trim());
+                      if (loginOk) {
+                        //TODO: Conectar a nuestro socket server
+                        Get.offNamed('home');
+                        print('Correcto');
+                      } else {
+                        //MOSTRAR ALERTA
+                        mostrarAlerta(
+                          context,
+                          'Login Incorrecto',
+                          'Revise sus credenciales nuevamente',
+                        );
+                      }
+                    },
+            ),
+          ),
         ],
       ),
     );

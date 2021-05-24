@@ -1,7 +1,7 @@
 part of 'widgets.dart';
 
 class Boton extends StatelessWidget {
-  final String text;
+  final Widget text;
   final Function onPressed;
 
   const Boton({
@@ -20,15 +20,7 @@ class Boton extends StatelessWidget {
       child: Container(
         height: 55,
         width: double.infinity,
-        child: Center(
-          child: Text(
-            this.text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-            ),
-          ),
-        ),
+        child: Center(child: this.text),
       ),
       onPressed: this.onPressed,
     );

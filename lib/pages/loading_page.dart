@@ -1,7 +1,9 @@
+import 'package:app_control_ayudante/controllers/auth_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class InicializandoPage extends StatelessWidget {
+class LoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,9 @@ class InicializandoPage extends StatelessWidget {
   }
 
   Future checkLoginState(BuildContext context) async {
-    return Future.delayed(Duration(seconds: 2), () => Get.offNamed('ingreso'));
+    //TODO: VERIFICAR SI YA TIENE SESION ACTIVA
+
+    return Future.delayed(Duration(seconds: 2), () => Get.offNamed('login'));
     // final authService = Provider.of<AuthService>(context, listen: false);
     // final autenticado = await authService.isLoggerdIn();
     // if (autenticado) {
