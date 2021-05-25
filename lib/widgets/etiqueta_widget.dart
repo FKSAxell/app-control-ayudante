@@ -6,10 +6,10 @@ class Etiqueta extends StatelessWidget {
   final String textVinculo;
 
   const Etiqueta(
-      {Key key,
-      @required this.ruta,
-      @required this.mensaje,
-      @required this.textVinculo})
+      {Key? key,
+      required this.ruta,
+      required this.mensaje,
+      required this.textVinculo})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

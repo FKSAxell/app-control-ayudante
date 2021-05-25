@@ -19,9 +19,9 @@ class RegisterResponse {
     this.token,
   });
 
-  bool ok;
-  Usuario usuario;
-  String token;
+  bool? ok;
+  Usuario? usuario;
+  String? token;
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
       RegisterResponse(
@@ -32,7 +32,7 @@ class RegisterResponse {
 
   Map<String, dynamic> toJson() => {
         "ok": ok,
-        "usuario": usuario.toJson(),
+        "usuario": usuario!.toJson(),
         "token": token,
       };
 }

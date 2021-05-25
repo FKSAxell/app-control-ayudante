@@ -15,9 +15,9 @@ class Usuario {
     this.uid,
   });
 
-  String nombre;
-  String email;
-  String uid;
+  String? nombre;
+  String? email;
+  String? uid;
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
         nombre: json["nombre"],

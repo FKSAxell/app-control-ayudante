@@ -2,12 +2,12 @@ part of 'widgets.dart';
 
 class Boton extends StatelessWidget {
   final Widget text;
-  final Function onPressed;
+  final Function? onPressed;
 
   const Boton({
-    Key key,
-    @required this.text,
-    @required this.onPressed,
+    Key? key,
+    required this.text,
+    required this.onPressed,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class Boton extends StatelessWidget {
         width: double.infinity,
         child: Center(child: this.text),
       ),
-      onPressed: this.onPressed,
+      onPressed: this.onPressed as void Function()?,
     );
   }
 }

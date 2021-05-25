@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
 import 'package:app_control_ayudante/models/login_response.dart';
-import 'package:app_control_ayudante/models/register_response.dart';
-import 'package:app_control_ayudante/models/usuario.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +15,7 @@ class AuthController extends GetxController {
   final _storage = GetStorage();
 
   //getters del token de forma statica
-  static Future<String> getToken() async {
+  static Future<String?> getToken() async {
     final _storage = GetStorage();
     final token = await _storage.read('token');
     return token;
@@ -36,7 +34,7 @@ class AuthController extends GetxController {
     };
 
     final resp = await http.post(
-      '${Enviroment.apiUrl}/login',
+      Uri.parse('${Enviroment.apiUrl}/login'),
       body: jsonEncode(data),
       headers: {'Content-type': 'application/json'},
     );
@@ -64,7 +62,7 @@ class AuthController extends GetxController {
     };
 
     final resp = await http.post(
-      '${Enviroment.apiUrl}/login/new',
+      Uri.parse('${Enviroment.apiUrl}/login/new'),
       body: jsonEncode(data),
       headers: {'Content-type': 'application/json'},
     );
@@ -86,8 +84,12 @@ class AuthController extends GetxController {
   Future<bool> isLoggedIn() async {
     final token = await this._storage.read('token');
     print(token);
+    if (token == null) {
+      this.logout();
+      return false;
+    }
     final resp = await http.get(
-      '${Enviroment.apiUrl}/login/renew',
+      Uri.parse('${Enviroment.apiUrl}/login/renew'),
       headers: {
         'Content-type': 'application/json',
         'x-token': token,
@@ -106,7 +108,7 @@ class AuthController extends GetxController {
     }
   }
 
-  Future _guardarToken(String token) async {
+  Future _guardarToken(String? token) async {
     return await _storage.write('token', token);
   }
 

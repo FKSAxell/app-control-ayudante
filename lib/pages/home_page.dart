@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Container(
           child: Text(
-              '${userCtrl.usuario.value.nombre}\n${userCtrl.usuario.value.email}'),
+              '${userCtrl.usuario.value!.nombre}\n${userCtrl.usuario.value!.email}'),
         ),
       ),
     );
@@ -39,7 +39,7 @@ class _MenuPrincipal extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: Colors.blue,
                   child: Text(
-                    userCtrl.usuario.value.nombre.substring(0, 2).toUpperCase(),
+                    userCtrl.usuario.value!.nombre!.substring(0, 2).toUpperCase(),
                     style: TextStyle(fontSize: 50, color: Colors.white),
                   ),
                 ),

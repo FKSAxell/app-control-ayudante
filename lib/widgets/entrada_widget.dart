@@ -8,9 +8,9 @@ class Entrada extends StatelessWidget {
   final bool isPassword;
 
   const Entrada({
-    @required this.icon,
-    @required this.placeholder,
-    @required this.textController,
+    required this.icon,
+    required this.placeholder,
+    required this.textController,
     this.keyboardType = TextInputType.text,
     this.isPassword = false,
   });
