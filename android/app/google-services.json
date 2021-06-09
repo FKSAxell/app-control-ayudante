@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "774766563894",
+    "project_id": "control-ayudante",
+    "storage_bucket": "control-ayudante.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774766563894:android:ebe6eb4f90173f8f70fe97",
+        "android_client_info": {
+          "package_name": "com.ayudantia.app_control_ayudante"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "774766563894-b9ocme0mn2dt9c1q1m1a39qspivdt2ci.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayudantia.app_control_ayudante",
+            "certificate_hash": "2ebf13149b92a911dd47d63a57047cb22c7ff0c5"
+          }
+        },
+        {
+          "client_id": "774766563894-v4c4hp5riptv0mmoc8u9jn6jf5ub4t5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhRhi0SEYQneTv6riNe_rB2P23obhRdkU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "774766563894-v4c4hp5riptv0mmoc8u9jn6jf5ub4t5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

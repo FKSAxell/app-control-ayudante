@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app_control_ayudante/controllers/push_notifications_controller.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
 import 'package:app_control_ayudante/models/login_response.dart';
@@ -31,6 +32,7 @@ class AuthController extends GetxController {
     final data = {
       'email': email,
       'password': password,
+      'tokenFCM': PushNotificationController.token
     };
 
     final resp = await http.post(
@@ -59,6 +61,7 @@ class AuthController extends GetxController {
       'nombre': nombre,
       'email': email,
       'password': password,
+      'tokenFCM': PushNotificationController.token
     };
 
     final resp = await http.post(

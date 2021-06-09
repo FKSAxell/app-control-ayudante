@@ -1,14 +1,36 @@
+import 'package:app_control_ayudante/controllers/push_notifications_controller.dart';
 import 'package:app_control_ayudante/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  await PushNotificationController.initializeApp();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+
+    // Context!
+    PushNotificationController.messagesStream.listen((message) {
+      Get.snackbar(
+        'Notificación',
+        '$message',
+        backgroundColor: Colors.white,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
