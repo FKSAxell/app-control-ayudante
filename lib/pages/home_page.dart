@@ -1,6 +1,9 @@
 import 'package:app_control_ayudante/controllers/auth_controller.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
+import 'package:app_control_ayudante/pages/ayudantia_page.dart';
+import 'package:app_control_ayudante/pages/estudiante_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,19 +13,37 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        // backwardsCompatibility: false,
+        // systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.orange),
+
         backgroundColor: Color(0xff243165),
         centerTitle: true,
         title: Text('Estudiante'),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications_none))
-        ],
       ),
       drawer: _MenuPrincipal(),
-      body: Center(
-        child: Container(
-          child: Text(
-              '${userCtrl.usuario.value!.nombre}\n${userCtrl.usuario.value!.email}'),
-        ),
+      body: AyudantiaPage(),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Color(0xff243165),
+        currentIndex: 3,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            label: "Ayudantías",
+            icon: Icon(Icons.class__outlined),
+          ),
+          BottomNavigationBarItem(
+            label: "Horario",
+            icon: Icon(Icons.schedule),
+          ),
+          BottomNavigationBarItem(
+            label: "Asistencia",
+            icon: Icon(Icons.assignment_outlined),
+          ),
+          BottomNavigationBarItem(
+            label: "Estudiante",
+            icon: Icon(Icons.person_outline),
+          ),
+        ],
       ),
     );
   }
