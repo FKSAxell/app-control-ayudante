@@ -1,3 +1,4 @@
+import 'package:app_control_ayudante/pages/ayudantia_page.dart';
 import 'package:app_control_ayudante/pages/estudiante_page.dart';
 import 'package:app_control_ayudante/pages/home_page.dart';
 import 'package:app_control_ayudante/pages/login_page.dart';
@@ -11,4 +12,5 @@ final List<GetPage> appRoutes = [
   GetPage(name: 'register', page: () => RegisterPage()),
   GetPage(name: 'home', page: () => HomePage()),
   GetPage(name: 'estudiante', page: () => EstudiantePage()),
+  GetPage(name: 'ayudantia', page: () => AyudantiaPage()),
 ];
