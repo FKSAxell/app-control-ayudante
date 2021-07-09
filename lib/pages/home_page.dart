@@ -1,5 +1,6 @@
 import 'package:app_control_ayudante/controllers/auth_controller.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
+import 'package:app_control_ayudante/pages/estudiante_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,15 +11,12 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        backgroundColor: Color(0xff243165),
+        centerTitle: true,
+        title: Text('Estudiante'),
       ),
       drawer: _MenuPrincipal(),
-      body: Center(
-        child: Container(
-          child: Text(
-              '${userCtrl.usuario.value!.nombre}\n${userCtrl.usuario.value!.email}'),
-        ),
-      ),
+      body: EstudiantePage(),
     );
   }
 }
@@ -39,7 +37,9 @@ class _MenuPrincipal extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: Colors.blue,
                   child: Text(
-                    userCtrl.usuario.value!.nombre!.substring(0, 2).toUpperCase(),
+                    userCtrl.usuario.value!.nombre!
+                        .substring(0, 2)
+                        .toUpperCase(),
                     style: TextStyle(fontSize: 50, color: Colors.white),
                   ),
                 ),
