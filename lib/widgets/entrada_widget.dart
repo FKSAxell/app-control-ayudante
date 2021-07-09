@@ -36,10 +36,12 @@ class Entrada extends StatelessWidget {
         controller: this.textController,
         obscureText: this.isPassword,
         decoration: InputDecoration(
-            prefixIcon: Icon(this.icon),
-            focusedBorder: InputBorder.none,
-            border: InputBorder.none,
-            hintText: this.placeholder),
+          // hintStyle: TextStyle(color: Colors.redAccent),
+          prefixIcon: Icon(this.icon),
+          focusedBorder: InputBorder.none,
+          border: InputBorder.none,
+          hintText: this.placeholder,
+        ),
       ),
     );
   }

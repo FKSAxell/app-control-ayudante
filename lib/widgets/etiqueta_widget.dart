@@ -36,7 +36,8 @@ class Etiqueta extends StatelessWidget {
             child: Text(
               this.textVinculo,
               style: TextStyle(
-                color: Colors.blue[600],
+                // color: Colors.blue[600],
+                color: Color(0xff243165),
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),

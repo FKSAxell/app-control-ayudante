@@ -12,7 +12,12 @@ class Logo extends StatelessWidget {
         width: 170,
         child: Column(
           children: [
-            Image(image: AssetImage('assets/logos/tag-logo.png')),
+            // Image(image: AssetImage('assets/logos/tag-logo.png')),
+            SvgPicture.asset(
+              'assets/logos/turtle1.svg',
+              color: Color(0xff243165),
+              width: 150,
+            ),
             SizedBox(
               height: 20,
             ),

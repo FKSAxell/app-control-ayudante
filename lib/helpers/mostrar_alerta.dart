@@ -14,7 +14,7 @@ mostrarAlerta(BuildContext context, String titulo, String subtitulo) {
           MaterialButton(
             child: Text('Ok'),
             elevation: 5,
-            textColor: Colors.blue,
+            textColor: Color(0xff243165),
             onPressed: () => Navigator.pop(context),
           )
         ],

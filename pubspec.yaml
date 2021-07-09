@@ -29,6 +29,7 @@ dependencies:
   get: ^4.1.4
   get_storage: ^2.0.2
   http: ^0.13.3
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:

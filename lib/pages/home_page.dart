@@ -10,7 +10,12 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        backgroundColor: Color(0xff243165),
+        centerTitle: true,
+        title: Text('Estudiante'),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.notifications_none))
+        ],
       ),
       drawer: _MenuPrincipal(),
       body: Center(
@@ -37,9 +42,11 @@ class _MenuPrincipal extends StatelessWidget {
                 width: double.infinity,
                 height: 200,
                 child: CircleAvatar(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Color(0xff243165),
                   child: Text(
-                    userCtrl.usuario.value!.nombre!.substring(0, 2).toUpperCase(),
+                    userCtrl.usuario.value!.nombre!
+                        .substring(0, 2)
+                        .toUpperCase(),
                     style: TextStyle(fontSize: 50, color: Colors.white),
                   ),
                 ),
@@ -49,7 +56,7 @@ class _MenuPrincipal extends StatelessWidget {
               child: Container(),
             ),
             ListTile(
-              leading: Icon(Icons.exit_to_app, color: Colors.blue),
+              leading: Icon(Icons.exit_to_app, color: Color(0xff243165)),
               title: Text('Cerrar Sesión'),
               onTap: () {
                 Get.offNamed('login');

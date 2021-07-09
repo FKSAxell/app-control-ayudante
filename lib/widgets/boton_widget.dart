@@ -15,7 +15,8 @@ class Boton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: 2,
         shape: StadiumBorder(),
-        primary: Color(0xff0D47A1),
+        // primary: Color(0xff0D47A1),
+        primary: Color(0xff243165),
       ),
       child: Container(
         height: 55,
