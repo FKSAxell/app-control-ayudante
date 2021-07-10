@@ -19,6 +19,13 @@ class HomePage extends StatelessWidget {
         backgroundColor: Color(0xff243165),
         centerTitle: true,
         title: Text('Estudiante'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.notifications_none),
+            splashRadius: 22,
+          )
+        ],
       ),
       drawer: _MenuPrincipal(),
       body: AyudantiaPage(),
