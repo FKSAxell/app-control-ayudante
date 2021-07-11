@@ -74,6 +74,7 @@ class __FormState extends State<_Form> {
           ),
           Obx(
             () => Boton(
+              color: 0xff243165,
               text: (authCtrl.autenticando.value)
                   ? CircularProgressIndicator()
                   : Text(
@@ -95,7 +96,7 @@ class __FormState extends State<_Form> {
                       if (loginOk) {
                         //TODO: Conectar a nuestro socket server
 
-                        Get.offNamed('home');
+                        Get.offNamed('base');
                         print('Correcto');
                       } else {
                         //MOSTRAR ALERTA

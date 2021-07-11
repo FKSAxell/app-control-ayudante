@@ -3,11 +3,12 @@ part of 'widgets.dart';
 class Boton extends StatelessWidget {
   final Widget text;
   final Function? onPressed;
-
+  final int color;
   const Boton({
     Key? key,
     required this.text,
     required this.onPressed,
+    required this.color,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class Boton extends StatelessWidget {
         elevation: 2,
         shape: StadiumBorder(),
         // primary: Color(0xff0D47A1),
-        primary: Color(0xff243165),
+        primary: Color(color),
       ),
       child: Container(
         height: 55,

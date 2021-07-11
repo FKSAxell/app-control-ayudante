@@ -31,7 +31,7 @@ class LoadingPage extends StatelessWidget {
     if (autenticado) {
       //TODO: CONECTAR AL SOCKET SERVER
       // Navigator.pushReplacementNamed(context, 'usuarios');
-      Get.offNamed('home');
+      Get.offNamed('base');
     } else {
       Get.offNamed('login');
     }

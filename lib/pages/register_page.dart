@@ -79,6 +79,7 @@ class __FormState extends State<_Form> {
           ),
           Obx(
             () => Boton(
+              color: 0xff243165,
               text: (authCtrl.registrando.value)
                   ? CircularProgressIndicator()
                   : Text(

@@ -1,4 +1,8 @@
+import 'package:app_control_ayudante/helpers/MyBehavior%20.dart';
+import 'package:app_control_ayudante/helpers/materias.dart';
+import 'package:app_control_ayudante/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 
 class AyudantiaPage extends StatelessWidget {
   const AyudantiaPage({Key? key}) : super(key: key);
@@ -6,27 +10,29 @@ class AyudantiaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Container(
       color: Color(0xff243165),
       child: Stack(
         children: [
           Container(
             height: size.height * 0.3,
-            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
                   height: 5,
                 ),
-                Align(
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Materias",
                     style: TextStyle(color: Colors.white, fontSize: 40),
                   ),
                 ),
-                Container(
+                GestureDetector(
+                  onTap: () {}, //TODO SEACH
                   child: Container(
                     padding: EdgeInsets.only(left: 15),
                     child: Row(
@@ -46,12 +52,12 @@ class AyudantiaPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                  width: size.width * 0.8,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(45),
-                    color: Colors.white,
+                    width: size.width * 0.8,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(45),
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 Container(
@@ -85,65 +91,101 @@ class AyudantiaPage extends StatelessWidget {
           ),
           SizedBox.expand(
             child: DraggableScrollableSheet(
-              initialChildSize: 0.6,
-              minChildSize: 0.6,
+              initialChildSize: 0.61,
+              minChildSize: 0.61,
               expand: false,
               builder: (_, controller) {
                 return Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xffE5E9F2),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(45),
-                        topRight: Radius.circular(45),
-                      ),
+                  decoration: BoxDecoration(
+                    color: Color(0xffE5E9F2),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: size.width * 0.2,
+                        height: 3,
+                        color: Color(0xff243165),
+                      ),
+                      Container(
+                        height: 60,
+                        padding: EdgeInsets.only(top: 15),
+                        // color: Colors.red,
+                        child: ListView.builder(
+                          // shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          physics: BouncingScrollPhysics(),
+                          itemCount: 6,
+                          // controller: controller, // set this too
+                          itemBuilder: (_, i) {
+                            return Container(
+                              width: 100,
+                              height: 40,
+                              margin: EdgeInsets.only(right: 8, bottom: 8),
+                              child: Boton(
+                                color: (i == 0)
+                                    ? 0xff243165
+                                    : 0xffffffff, //TODO:CAMBIAR ESTO DE PASAR INT
+                                onPressed: () {},
+                                text: Text(
+                                  "Básico",
+                                  style: TextStyle(
+                                    color: Color((i == 0)
+                                        ? 0xffffffff
+                                        : 0xff000000), //TODO:CAMBIAR ESTO DE PASAR INT
+                                  ),
+                                ),
+                              ),
+                            );
+                            // Container(
+                            //   margin: EdgeInsets.only(right: 8, bottom: 5),
+                            //   width: 100,
+                            //   height: 40,
+                            //   decoration: BoxDecoration(
+                            //       borderRadius: BorderRadius.circular(45),
+                            //       color: Colors.amberAccent,
+                            //       boxShadow: [
+                            //         BoxShadow(
+                            //           color: Colors.black12,
+                            //           offset: Offset(1, 1),
+                            //         ),
+                            //       ]),
+                            // );
+                          },
                         ),
-                        Container(
-                          width: size.width * 0.2,
-                          height: 3,
-                          color: Color(0xff243165),
-                        ),
-                        Container(
-                          height: 60,
-                          // color: Colors.red,
-                          child: ListView.builder(
-                              // shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              physics: BouncingScrollPhysics(),
-                              itemCount: 6,
-                              // controller: controller, // set this too
-                              itemBuilder: (_, i) {
-                                return Row(
-                                  children: [
-                                    Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 8),
-                                      width: 100,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(45),
-                                        color: Colors.amberAccent,
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }),
-                        ),
-                        Expanded(
-                          child: ListView.builder(
-                            physics: BouncingScrollPhysics(),
-                            itemCount: 30,
+                      ),
+                      Expanded(
+                        child: ScrollConfiguration(
+                          behavior: MyBehavior(),
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) => Divider(
+                              height: 1,
+                              thickness: 0.2,
+                            ),
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            itemCount: materias.length,
                             controller: controller, // set this too
-                            itemBuilder: (_, i) =>
-                                ListTile(title: Text('Item $i')),
+
+                            itemBuilder: (_, i) {
+                              return ListTile(
+                                onTap: () {
+                                  // do something
+                                },
+                                title: Text('${materias[i]}'),
+                              );
+                            },
                           ),
                         ),
-                      ],
-                    ));
+                      ),
+                    ],
+                  ),
+                );
               },
             ),
           )
@@ -184,3 +226,51 @@ class AyudanteEnClase extends StatelessWidget {
     );
   }
 }
+
+//TODO SEACH IMPL
+// class TheSearch extends SearchDelegate<String> {
+//   final suggestions1 = ["https://www.google.com"];
+
+//   @override
+//   String get searchFieldLabel => "Enter a web address";
+
+//   @override
+//   List<Widget> buildActions(BuildContext context) {
+//     return [
+//       IconButton(
+//         icon: Icon(Icons.clear),
+//         onPressed: () {
+//           query = "";
+//         },
+//       )
+//     ];
+//   }
+
+//   @override
+//   Widget buildLeading(BuildContext context) {
+//     return IconButton(
+//       icon: AnimatedIcon(
+//         icon: AnimatedIcons.menu_arrow,
+//         progress: transitionAnimation,
+//       ),
+//       onPressed: () {
+//         close(context, "");
+//       },
+//     );
+//   }
+
+//   @override
+//   Widget buildResults(BuildContext context) {
+//     return Container();
+//   }
+
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     final suggestions = query.isEmpty ? suggestions1 : [];
+//     return ListView.builder(
+//       itemCount: suggestions.length,
+//       itemBuilder: (content, index) => ListTile(
+//           leading: Icon(Icons.arrow_left), title: Text(suggestions[index])),
+//     );
+//   }
+// }
