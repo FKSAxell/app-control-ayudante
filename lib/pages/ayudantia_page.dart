@@ -1,15 +1,22 @@
 import 'package:app_control_ayudante/helpers/MyBehavior%20.dart';
 import 'package:app_control_ayudante/helpers/materias.dart';
-import 'package:app_control_ayudante/widgets/widgets.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-class AyudantiaPage extends StatelessWidget {
+class AyudantiaPage extends StatefulWidget {
   const AyudantiaPage({Key? key}) : super(key: key);
 
   @override
+  _AyudantiaPageState createState() => _AyudantiaPageState();
+}
+
+class _AyudantiaPageState extends State<AyudantiaPage>
+    with TickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    TabController tabCtrl =
+        TabController(length: 8, vsync: this, initialIndex: 0);
     return Container(
       color: Color(0xff243165),
       child: Stack(
@@ -112,76 +119,75 @@ class AyudantiaPage extends StatelessWidget {
                         height: 3,
                         color: Color(0xff243165),
                       ),
-                      Container(
-                        height: 60,
-                        padding: EdgeInsets.only(top: 15),
-                        // color: Colors.red,
-                        child: ListView.builder(
-                          // shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          physics: BouncingScrollPhysics(),
-                          itemCount: 6,
-                          // controller: controller, // set this too
-                          itemBuilder: (_, i) {
-                            return Container(
-                              width: 100,
-                              height: 40,
-                              margin: EdgeInsets.only(right: 8, bottom: 8),
-                              child: Boton(
-                                color: (i == 0)
-                                    ? 0xff243165
-                                    : 0xffffffff, //TODO:CAMBIAR ESTO DE PASAR INT
-                                onPressed: () {},
-                                text: Text(
-                                  "Básico",
-                                  style: TextStyle(
-                                    color: Color((i == 0)
-                                        ? 0xffffffff
-                                        : 0xff000000), //TODO:CAMBIAR ESTO DE PASAR INT
-                                  ),
-                                ),
-                              ),
-                            );
-                            // Container(
-                            //   margin: EdgeInsets.only(right: 8, bottom: 5),
-                            //   width: 100,
-                            //   height: 40,
-                            //   decoration: BoxDecoration(
-                            //       borderRadius: BorderRadius.circular(45),
-                            //       color: Colors.amberAccent,
-                            //       boxShadow: [
-                            //         BoxShadow(
-                            //           color: Colors.black12,
-                            //           offset: Offset(1, 1),
-                            //         ),
-                            //       ]),
-                            // );
-                          },
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Theme(
+                        data: ThemeData(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                         ),
+                        child: TabBar(
+                          isScrollable: true,
+                          physics: BouncingScrollPhysics(),
+                          controller: tabCtrl,
+                          labelColor: Colors.white,
+                          labelStyle: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          unselectedLabelColor: Color(0xff47525E),
+                          indicator: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25.0),
+                            color: Color(0xff243165),
+                          ),
+                          onTap: (value) {},
+                          tabs: <Widget>[
+                            Tab(
+                              child: Text("FCNM"),
+                            ),
+                            Tab(
+                              child: Text("FIEC"),
+                            ),
+                            Tab(
+                              child: Text("FADCOM"),
+                            ),
+                            Tab(
+                              child: Text("FCSH"),
+                            ),
+                            Tab(
+                              child: Text("FCV"),
+                            ),
+                            Tab(
+                              child: Text("FIMCP"),
+                            ),
+                            Tab(
+                              child: Text("FICT"),
+                            ),
+                            Tab(
+                              child: Text("FIMCM"),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
                       ),
                       Expanded(
-                        child: ScrollConfiguration(
-                          behavior: MyBehavior(),
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) => Divider(
-                              height: 1,
-                              thickness: 0.2,
-                            ),
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            itemCount: materias.length,
-                            controller: controller, // set this too
-
-                            itemBuilder: (_, i) {
-                              return ListTile(
-                                onTap: () {
-                                  // do something
-                                },
-                                title: Text('${materias[i]}'),
-                              );
-                            },
-                          ),
+                        child: TabBarView(
+                          controller: tabCtrl,
+                          children: [
+                            Materias(controller: controller),
+                            Materias(controller: controller),
+                            Materias(controller: controller),
+                            Materias(controller: controller),
+                            Materias(controller: controller),
+                            Materias(controller: controller),
+                            Materias(controller: controller),
+                            Materias(controller: controller),
+                          ],
                         ),
-                      ),
+                      )
                     ],
                   ),
                 );
@@ -189,6 +195,39 @@ class AyudantiaPage extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class Materias extends StatelessWidget {
+  const Materias({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+  final ScrollController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollConfiguration(
+      behavior: MyBehavior(),
+      child: ListView.separated(
+        separatorBuilder: (context, index) => Divider(
+          height: 1,
+          thickness: 0.2,
+        ),
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemCount: materias.length,
+        controller: controller, // set this too
+
+        itemBuilder: (_, i) {
+          return ListTile(
+            onTap: () {
+              // do something
+            },
+            title: Text('${materias[i]}'),
+          );
+        },
       ),
     );
   }

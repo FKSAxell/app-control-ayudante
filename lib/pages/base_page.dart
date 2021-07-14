@@ -1,6 +1,7 @@
 import 'package:app_control_ayudante/controllers/auth_controller.dart';
 import 'package:app_control_ayudante/controllers/menu_controller.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
+import 'package:app_control_ayudante/pages/asistencia_page.dart';
 import 'package:app_control_ayudante/pages/ayudantia_page.dart';
 import 'package:app_control_ayudante/pages/estudiante_page.dart';
 import 'package:app_control_ayudante/pages/horario_page.dart';
@@ -47,7 +48,7 @@ class BasePage extends StatelessWidget {
           children: [
             AyudantiaPage(),
             HorarioPage(),
-            PruebaPage(),
+            AsistenciaPage(),
             EstudiantePage(),
           ],
         ),

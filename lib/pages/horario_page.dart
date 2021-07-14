@@ -33,9 +33,13 @@ class _HorarioPageState extends State<HorarioPage>
                 ),
                 child: TabBar(
                   isScrollable: true,
+                  physics: BouncingScrollPhysics(),
                   controller: tabCtrl,
                   labelColor: Colors.white,
-                  labelStyle: TextStyle(fontSize: 15),
+                  labelStyle: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                   unselectedLabelColor: Color(0xff47525E),
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(
