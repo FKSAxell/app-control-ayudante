@@ -3,6 +3,7 @@ import 'package:app_control_ayudante/controllers/menu_controller.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:app_control_ayudante/pages/ayudantia_page.dart';
 import 'package:app_control_ayudante/pages/estudiante_page.dart';
+import 'package:app_control_ayudante/pages/horario_page.dart';
 import 'package:app_control_ayudante/pages/prueba_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,14 +17,16 @@ class BasePage extends StatelessWidget {
     PageController pageCtrl =
         PageController(initialPage: menuCtrl.selectMenuOpt.value);
     final size = MediaQuery.of(context).size;
+    final titulos = ["Ayudantías", "Horario", "Asitencia", "Estudiante"];
     return Scaffold(
       appBar: AppBar(
         // backwardsCompatibility: false,
         // systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.orange),
+        brightness: Brightness.dark,
         elevation: 0,
         backgroundColor: Color(0xff243165),
         centerTitle: true,
-        title: Text('Estudiante'),
+        title: Obx(() => Text(titulos[menuCtrl.selectMenuOpt.value])),
         actions: [
           IconButton(
             onPressed: () {},
@@ -43,7 +46,7 @@ class BasePage extends StatelessWidget {
           },
           children: [
             AyudantiaPage(),
-            PruebaPage(),
+            HorarioPage(),
             PruebaPage(),
             EstudiantePage(),
           ],

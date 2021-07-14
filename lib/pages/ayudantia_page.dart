@@ -2,7 +2,6 @@ import 'package:app_control_ayudante/helpers/MyBehavior%20.dart';
 import 'package:app_control_ayudante/helpers/materias.dart';
 import 'package:app_control_ayudante/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
 
 class AyudantiaPage extends StatelessWidget {
   const AyudantiaPage({Key? key}) : super(key: key);
