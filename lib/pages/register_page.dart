@@ -99,6 +99,7 @@ class __FormState extends State<_Form> {
                         emailCtrl.text.trim(),
                         passCtrl.text.trim(),
                       );
+
                       if (registroOk == true) {
                         //TODO: Conectar a nuestro socket server
                         Get.offNamed('login');

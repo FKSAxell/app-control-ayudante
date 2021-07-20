@@ -5,7 +5,6 @@ import 'package:app_control_ayudante/pages/asistencia_page.dart';
 import 'package:app_control_ayudante/pages/ayudantia_page.dart';
 import 'package:app_control_ayudante/pages/estudiante_page.dart';
 import 'package:app_control_ayudante/pages/horario_page.dart';
-import 'package:app_control_ayudante/pages/prueba_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -92,9 +91,9 @@ class BasePage extends StatelessWidget {
 }
 
 class _MenuPrincipal extends StatelessWidget {
-  final userCtrl = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
+    final userCtrl = Get.find<UserController>();
     return Drawer(
       child: Container(
         child: Column(
@@ -107,7 +106,7 @@ class _MenuPrincipal extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: Color(0xff243165),
                   child: Text(
-                    userCtrl.usuario.value!.nombre!
+                    userCtrl.usuario.value!.nombre
                         .substring(0, 2)
                         .toUpperCase(),
                     style: TextStyle(fontSize: 50, color: Colors.white),

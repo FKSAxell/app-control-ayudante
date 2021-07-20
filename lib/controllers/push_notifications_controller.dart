@@ -32,7 +32,8 @@ class PushNotificationController {
     // Push Notifications
     await Firebase.initializeApp();
     // await requestPermission();
-
+    //TODO: OJO VALIDACIÓN:
+    //Firebase Exception ([firebase_messaging/unknown] java.io.IOException: java.util.concurrent.ExecutionException: java.io.IOException: SERVICE_NOT_AVAILABLE)
     token = await FirebaseMessaging.instance.getToken();
     print('Firebase Token: $token');
 

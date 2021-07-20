@@ -4,6 +4,7 @@ import 'package:app_control_ayudante/controllers/push_notifications_controller.d
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
 import 'package:app_control_ayudante/models/login_response.dart';
+import 'package:app_control_ayudante/models/usuario.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -46,6 +47,7 @@ class AuthController extends GetxController {
       final loginResponse = loginResponseFromJson(resp.body);
       final userCtrl = Get.find<UserController>();
       userCtrl.usuario.value = loginResponse.usuario;
+      print(usuarioToJson(loginResponse.usuario!));
 
       await this._guardarToken(loginResponse.token);
 

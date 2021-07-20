@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:app_control_ayudante/controllers/user_controller.dart';
+import 'package:get/get.dart';
 
 class EstudiantePage extends StatelessWidget {
   const EstudiantePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final userCtrl = Get.find<UserController>();
     final size = MediaQuery.of(context).size;
     return Container(
       color: Color(0xffE5E9F2),
@@ -109,21 +112,25 @@ class EstudiantePage extends StatelessWidget {
                       ),
                 ),
                 Text(
-                  "Axell Concha",
+                  userCtrl.usuario.value!.nombre,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
                   ),
                 ),
                 Text(
-                  "Computación",
+                  (userCtrl.usuario.value!.carrera != null)
+                      ? userCtrl.usuario.value!.carrera!.nombre
+                      : "No tiene Carrera",
                   style: TextStyle(
                     color: Colors.white70,
                     fontSize: 16,
                   ),
                 ),
                 Text(
-                  "FIEC",
+                  (userCtrl.usuario.value!.carrera != null)
+                      ? userCtrl.usuario.value!.carrera!.facultad.codigo
+                      : "No Tiene Facultad",
                   style: TextStyle(
                     color: Colors.white70,
                     fontSize: 16,
