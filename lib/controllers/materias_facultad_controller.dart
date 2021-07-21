@@ -1,5 +1,4 @@
 import 'package:app_control_ayudante/global/environment.dart';
-import 'package:app_control_ayudante/models/facultad.dart';
 import 'package:app_control_ayudante/models/materias_facultad_response.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

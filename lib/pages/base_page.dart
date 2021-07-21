@@ -14,7 +14,6 @@ import 'package:get/get.dart';
 class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Get.find<UserController>();
     final menuCtrl = Get.put(MenuController());
     Get.put(RegistrosController());
     Get.put(MateriasFacultadController());
@@ -25,8 +24,6 @@ class BasePage extends StatelessWidget {
     final titulos = ["Ayudantías", "Horario", "Asitencia", "Estudiante"];
     return Scaffold(
       appBar: AppBar(
-        // backwardsCompatibility: false,
-        // systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.orange),
         brightness: Brightness.dark,
         elevation: 0,
         backgroundColor: Color(0xff243165),
@@ -59,7 +56,6 @@ class BasePage extends StatelessWidget {
       ),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
-          // selectedItemColor: Color(0xff243165),
           fixedColor: Color(0xff243165),
           currentIndex: menuCtrl.selectMenuOpt.value,
           type: BottomNavigationBarType.fixed,
@@ -82,11 +78,9 @@ class BasePage extends StatelessWidget {
             ),
           ],
           onTap: (int i) {
-            //TODO: Axell del futuro OJO Discutir Animación con tu yo del pasado
             pageCtrl.animateToPage(i,
                 duration: Duration(milliseconds: 1000),
                 curve: Curves.fastLinearToSlowEaseIn);
-            // pageCtrl.jumpToPage(i);
             menuCtrl.selectMenuOpt.value = i;
           },
         ),

@@ -42,8 +42,7 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                 ),
                 GestureDetector(
                   onTap: () => showSearch(
-                      context: context,
-                      delegate: MateriaSearchDelegate()), //TODO SEACH
+                      context: context, delegate: MateriaSearchDelegate()),
                   child: Container(
                     padding: EdgeInsets.only(left: 15),
                     child: Row(
@@ -73,7 +72,6 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                 ),
                 Container(
                   height: 75,
-                  // color: Colors.red,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     physics: BouncingScrollPhysics(),
@@ -132,54 +130,56 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                           highlightColor: Colors.transparent,
                           splashColor: Colors.transparent,
                         ),
-                        child:
-                            Obx(() => (matFacCtrl.materiasFacultad.length != 0)
-                                ? TabBar(
-                                    isScrollable: true,
-                                    physics: BouncingScrollPhysics(),
-                                    controller: matFacCtrl.tabCtrl,
-                                    labelColor: Colors.white,
-                                    labelStyle: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    unselectedLabelColor: Color(0xff47525E),
-                                    indicator: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(25.0),
-                                      color: Color(0xff243165),
-                                    ),
-                                    onTap: (value) {},
-                                    tabs: matFacCtrl.materiasFacultad
-                                        .map(
-                                          (facultad) => Tab(
-                                            child: Text(
-                                              facultad.codigo,
-                                            ),
+                        child: Obx(
+                          () => (matFacCtrl.materiasFacultad.length != 0)
+                              ? TabBar(
+                                  isScrollable: true,
+                                  physics: BouncingScrollPhysics(),
+                                  controller: matFacCtrl.tabCtrl,
+                                  labelColor: Colors.white,
+                                  labelStyle: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  unselectedLabelColor: Color(0xff47525E),
+                                  indicator: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25.0),
+                                    color: Color(0xff243165),
+                                  ),
+                                  onTap: (value) {},
+                                  tabs: matFacCtrl.materiasFacultad
+                                      .map(
+                                        (facultad) => Tab(
+                                          child: Text(
+                                            facultad.codigo,
                                           ),
-                                        )
-                                        .toList(),
-                                  )
-                                : CircularProgressIndicator()),
+                                        ),
+                                      )
+                                      .toList(),
+                                )
+                              : CircularProgressIndicator(),
+                        ),
                       ),
                       SizedBox(
                         height: 15,
                       ),
                       Expanded(
-                          child: Obx(
-                        () => (matFacCtrl.materiasFacultad.length != 0)
-                            ? TabBarView(
-                                controller: matFacCtrl.tabCtrl,
-                                children: matFacCtrl.materiasFacultad
-                                    .map(
-                                      (facultad) => Materias(
-                                        controller: controller,
-                                        materias: facultad.materia,
-                                      ),
-                                    )
-                                    .toList(),
-                              )
-                            : Container(),
-                      ))
+                        child: Obx(
+                          () => (matFacCtrl.materiasFacultad.length != 0)
+                              ? TabBarView(
+                                  controller: matFacCtrl.tabCtrl,
+                                  children: matFacCtrl.materiasFacultad
+                                      .map(
+                                        (facultad) => Materias(
+                                          controller: controller,
+                                          materias: facultad.materia,
+                                        ),
+                                      )
+                                      .toList(),
+                                )
+                              : Container(),
+                        ),
+                      )
                     ],
                   ),
                 );
@@ -212,13 +212,10 @@ class Materias extends StatelessWidget {
         ),
         physics: const AlwaysScrollableScrollPhysics(),
         itemCount: materias.length,
-        controller: controller, // set this too
-
+        controller: controller,
         itemBuilder: (_, i) {
           return ListTile(
-            onTap: () {
-              // do something
-            },
+            onTap: () {},
             title: Text('${materias[i].nombre}'),
           );
         },

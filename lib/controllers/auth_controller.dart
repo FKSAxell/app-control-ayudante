@@ -10,13 +10,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController {
-  // Rx<Usuario> usuario = new Usuario().obs;
   RxBool autenticando = false.obs;
   RxBool registrando = false.obs;
-  //Create Storage
+
   final _storage = GetStorage();
 
-  //getters del token de forma statica
   static Future<String?> getToken() async {
     final _storage = GetStorage();
     final token = await _storage.read('token');
@@ -74,13 +72,8 @@ class AuthController extends GetxController {
 
     this.registrando.value = false;
     if (resp.statusCode == 200) {
-      // final registerResponse = registerResponseFromJson(resp.body);
-      // this.usuario = registerResponse.usuario;
-      // await this._guardarToken(registerResponse.token);
-
       return true;
     } else {
-      //TODO: PROBLEMA QUE SEA MAPEADO DESDEL EL BACK PARTE 1
       final respBody = jsonDecode(resp.body);
       return respBody['msg'];
     }
@@ -118,7 +111,6 @@ class AuthController extends GetxController {
   }
 
   Future logout() async {
-    // Delete value
     return await _storage.remove('token');
   }
 }

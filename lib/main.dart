@@ -25,7 +25,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    // Context!
     PushNotificationController.messagesStream.listen((message) {
       Get.snackbar(
         'Notificación',
@@ -45,70 +44,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
-
-
-//  Container(
-//                       padding: EdgeInsets.only(top: 20),
-//                       child: Row(
-//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                         children: [
-//                           BoxMateria(
-//                             text: "Fundamentos de Programación",
-//                             color: Color(0xfffd79a8),
-//                           ),
-//                           BoxMateria(
-//                             text: "Algebra Lineal",
-//                             color: Color(0xff2ecc71),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                     Container(
-//                       padding: EdgeInsets.only(top: 20),
-//                       child: Row(
-//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                         children: [
-//                           BoxMateria(
-//                             text: "Física I",
-//                             color: Color(0xff9b59b6),
-//                           ),
-//                           BoxMateria(
-//                             text: "Biología",
-//                             color: Color(0xffe67e22),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                     Container(
-//                       padding: EdgeInsets.only(top: 20),
-//                       child: Row(
-//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                         children: [
-//                           BoxMateria(
-//                             text: "Química",
-//                             color: Color(0xffe74c3c),
-//                           ),
-//                           BoxMateria(
-//                             text: "Ecología",
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                     Container(
-//                       padding: EdgeInsets.only(top: 20),
-//                       child: Row(
-//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                         children: [
-//                           BoxMateria(
-//                             text: "Ecuaciones Diferenciales",
-//                             color: Color(0xfff1c40f),
-//                           ),
-//                           BoxMateria(
-//                             text: "Cálculo I",
-//                             color: Color(0xff34495e),
-//                           ),
-//                         ],
-//                       ),
-//                     ),

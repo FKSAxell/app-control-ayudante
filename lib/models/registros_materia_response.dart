@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final registrosMateriaResponse = registrosMateriaResponseFromJson(jsonString);
-
 import 'dart:convert';
 
 import 'registro.dart';

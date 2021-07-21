@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final materiasPorFacultadResponse = materiasPorFacultadResponseFromJson(jsonString);
-
 import 'dart:convert';
 
 MateriasPorFacultadResponse materiasPorFacultadResponseFromJson(String str) =>

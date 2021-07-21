@@ -14,7 +14,7 @@ class LoadingPage extends StatelessWidget {
         future: checkLoginState(context),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           return Center(
-            child: CircularProgressIndicator(), //TODO: OJO CARGA
+            child: CircularProgressIndicator(),
           );
         },
       ),
@@ -22,17 +22,12 @@ class LoadingPage extends StatelessWidget {
   }
 
   Future checkLoginState(BuildContext context) async {
-    //TODO: VERIFICAR SI YA TIENE SESION ACTIVA
-
-    // return Future.delayed(Duration(seconds: 2), () => Get.offNamed('login'));
-    // final authService = Provider.of<AuthService>(context, listen: false);
     final authCtrl = Get.put(AuthController(), permanent: true);
     Get.put(UserController(), permanent: true);
 
     final autenticado = await authCtrl.isLoggedIn();
     if (autenticado) {
       //TODO: CONECTAR AL SOCKET SERVER
-      // Navigator.pushReplacementNamed(context, 'usuarios');
       Get.offNamed('base');
     } else {
       Get.offNamed('login');

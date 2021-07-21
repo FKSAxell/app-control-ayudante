@@ -10,8 +10,6 @@ class EstudiantePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final userCtrl = Get.find<UserController>();
     final regCtrl = Get.find<RegistrosController>();
-    // Obx(
-    //   () =>
     final size = MediaQuery.of(context).size;
     return Container(
       color: Color(0xffE5E9F2),
@@ -25,19 +23,22 @@ class EstudiantePage extends StatelessWidget {
               ),
               Expanded(
                 child: (regCtrl.registros.length != 0)
-                    ? Obx(() => ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        itemCount: regCtrl.registros.length,
-                        itemBuilder: (context, index) {
-                          List<BoxMateria> boxs = [
-                            ...regCtrl.registros[index].map((e) => BoxMateria(
-                                  text: e.materia.nombre,
-                                ))
-                          ];
-                          return MateriaRow(
-                            materias: boxs,
-                          );
-                        }))
+                    ? Obx(
+                        () => ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          itemCount: regCtrl.registros.length,
+                          itemBuilder: (context, index) {
+                            List<BoxMateria> boxs = [
+                              ...regCtrl.registros[index].map((e) => BoxMateria(
+                                    text: e.materia.nombre,
+                                  ))
+                            ];
+                            return MateriaRow(
+                              materias: boxs,
+                            );
+                          },
+                        ),
+                      )
                     : Center(
                         child: Container(
                           child: Text("Registrate en Materias"),
@@ -54,17 +55,13 @@ class EstudiantePage extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: CircleAvatar(
-                      radius: 55,
-                      backgroundColor: Colors.yellow,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(55),
-                        child:
-                            Image(image: AssetImage("assets/test/axell.jpg")),
-                      )
-                      // FlutterLogo(
-                      //   size: 50,
-                      // ),
-                      ),
+                    radius: 55,
+                    backgroundColor: Colors.yellow,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(55),
+                      child: Image(image: AssetImage("assets/test/axell.jpg")),
+                    ),
+                  ),
                 ),
                 Text(
                   userCtrl.usuario.value!.nombre,
@@ -137,15 +134,10 @@ class EstudiantePage extends StatelessWidget {
                   ),
                   width: size.width * 0.50,
                   height: size.height * 0.10,
-
-                  // child:,
                 )
               ],
             ),
           ),
-          // Container(
-          //   color: Colors.grey,
-          // )
         ],
       ),
     );
@@ -186,7 +178,6 @@ class BoxMateria extends StatelessWidget {
     return Container(
       width: size.width * 0.40,
       height: 100,
-      //TODO: OJO con la clase Material
       child: Material(
         color: this.color,
         child: InkWell(

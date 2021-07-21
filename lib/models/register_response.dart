@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final registerResponse = registerResponseFromJson(jsonString);
-
 import 'dart:convert';
 
 import 'package:app_control_ayudante/models/usuario.dart';

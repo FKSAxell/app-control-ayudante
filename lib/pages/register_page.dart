@@ -74,7 +74,6 @@ class __FormState extends State<_Form> {
             icon: Icons.lock_outline,
             placeholder: 'Contraseña',
             isPassword: true,
-            // keyboardType: TextInputType.emailAddress,
             textController: passCtrl,
           ),
           Obx(
@@ -92,7 +91,6 @@ class __FormState extends State<_Form> {
               onPressed: (authCtrl.registrando.value)
                   ? null
                   : () async {
-                      //desaparecer teclado :D
                       FocusScope.of(context).unfocus();
                       final registroOk = await authCtrl.register(
                         nameCtrl.text.trim(),
@@ -101,7 +99,6 @@ class __FormState extends State<_Form> {
                       );
 
                       if (registroOk == true) {
-                        //TODO: Conectar a nuestro socket server
                         Get.offNamed('login');
                         Get.snackbar(
                           "Registro Exitoso",
@@ -114,9 +111,7 @@ class __FormState extends State<_Form> {
                         //   '$registroOk',
                         // );
 
-                        // Navigator.pushReplacementNamed(context, 'usuarios');
                       } else {
-                        //MOSTRAR ALERTA
                         mostrarAlerta(
                           context,
                           'Registro Incorrecto',

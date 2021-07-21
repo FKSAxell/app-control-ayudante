@@ -30,13 +30,10 @@ class Etiqueta extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Get.offAllNamed(this.ruta);
-
-              //Navigator.pushReplacementNamed(context, this.ruta);
             },
             child: Text(
               this.textVinculo,
               style: TextStyle(
-                // color: Colors.blue[600],
                 color: Color(0xff243165),
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

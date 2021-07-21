@@ -1,6 +1,6 @@
 part of 'widgets.dart';
 
-class Entrada extends StatelessWidget {
+class Entrada extends StatefulWidget {
   final IconData icon;
   final String placeholder;
   final TextEditingController textController;
@@ -16,6 +16,25 @@ class Entrada extends StatelessWidget {
   });
 
   @override
+  _EntradaState createState() => _EntradaState();
+}
+
+class _EntradaState extends State<Entrada> {
+  bool _isHidden = false;
+
+  void _togglePasswordView() {
+    setState(() {
+      _isHidden = !_isHidden;
+    });
+  }
+
+  @override
+  void initState() {
+    _isHidden = this.widget.isPassword;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 5, left: 5, bottom: 5, right: 20),
@@ -25,23 +44,30 @@ class Entrada extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         boxShadow: <BoxShadow>[
           BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              offset: Offset(0, 5),
-              blurRadius: 5)
+            color: Colors.black.withOpacity(0.05),
+            offset: Offset(0, 5),
+            blurRadius: 5,
+          )
         ],
       ),
       child: TextField(
         autocorrect: false,
-        keyboardType: this.keyboardType,
-        controller: this.textController,
-        obscureText: this.isPassword,
+        keyboardType: this.widget.keyboardType,
+        controller: this.widget.textController,
+        obscureText: _isHidden,
         decoration: InputDecoration(
-          // hintStyle: TextStyle(color: Colors.redAccent),
-          prefixIcon: Icon(this.icon),
-          focusedBorder: InputBorder.none,
-          border: InputBorder.none,
-          hintText: this.placeholder,
-        ),
+            prefixIcon: Icon(this.widget.icon),
+            focusedBorder: InputBorder.none,
+            border: InputBorder.none,
+            hintText: this.widget.placeholder,
+            suffix: (this.widget.isPassword)
+                ? InkWell(
+                    onTap: _togglePasswordView,
+                    child: Icon(
+                      _isHidden ? Icons.visibility : Icons.visibility_off,
+                    ),
+                  )
+                : null),
       ),
     );
   }

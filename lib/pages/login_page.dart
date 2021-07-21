@@ -70,7 +70,6 @@ class __FormState extends State<_Form> {
             icon: Icons.lock_outline,
             placeholder: 'Contraseña',
             isPassword: true,
-            // keyboardType: TextInputType.emailAddress,
             textController: passCtrl,
           ),
           Obx(
@@ -88,7 +87,6 @@ class __FormState extends State<_Form> {
               onPressed: (authCtrl.autenticando.value)
                   ? null
                   : () async {
-                      //desaparecer teclado :D
                       FocusScope.of(context).unfocus();
                       final loginOk = await authCtrl.login(
                         emailCtrl.text.trim(),
@@ -100,7 +98,6 @@ class __FormState extends State<_Form> {
                         Get.offNamed('base');
                         print('Correcto');
                       } else {
-                        //MOSTRAR ALERTA
                         mostrarAlerta(
                           context,
                           'Login Incorrecto',
