@@ -1,3 +1,4 @@
+import 'package:app_control_ayudante/controllers/registros_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,9 @@ class EstudiantePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userCtrl = Get.find<UserController>();
+    final regCtrl = Get.find<RegistrosController>();
+    // Obx(
+    //   () =>
     final size = MediaQuery.of(context).size;
     return Container(
       color: Color(0xffE5E9F2),
@@ -20,74 +24,25 @@ class EstudiantePage extends StatelessWidget {
                 height: size.height * 0.35,
               ),
               Expanded(
-                child: ListView(
-                  physics: BouncingScrollPhysics(),
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 40),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          BoxMateria(
-                            text: "Fundamentos de Programación",
-                            color: Color(0xfffd79a8),
-                          ),
-                          BoxMateria(
-                            text: "Algebra Lineal",
-                            color: Color(0xff2ecc71),
-                          ),
-                        ],
+                child: (regCtrl.registros.length != 0)
+                    ? Obx(() => ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: regCtrl.registros.length,
+                        itemBuilder: (context, index) {
+                          List<BoxMateria> boxs = [
+                            ...regCtrl.registros[index].map((e) => BoxMateria(
+                                  text: e.materia.nombre,
+                                ))
+                          ];
+                          return MateriaRow(
+                            materias: boxs,
+                          );
+                        }))
+                    : Center(
+                        child: Container(
+                          child: Text("Registrate en Materias"),
+                        ),
                       ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          BoxMateria(
-                            text: "Física I",
-                            color: Color(0xff9b59b6),
-                          ),
-                          BoxMateria(
-                            text: "Biología",
-                            color: Color(0xffe67e22),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          BoxMateria(
-                            text: "Química",
-                            color: Color(0xffe74c3c),
-                          ),
-                          BoxMateria(
-                            text: "Ecología",
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          BoxMateria(
-                            text: "Ecuaciones Diferenciales",
-                            color: Color(0xfff1c40f),
-                          ),
-                          BoxMateria(
-                            text: "Cálculo I",
-                            color: Color(0xff34495e),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
               )
             ],
           ),
@@ -192,6 +147,25 @@ class EstudiantePage extends StatelessWidget {
           //   color: Colors.grey,
           // )
         ],
+      ),
+    );
+  }
+}
+
+class MateriaRow extends StatelessWidget {
+  final List<BoxMateria> materias;
+  const MateriaRow({
+    Key? key,
+    required this.materias,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: materias,
       ),
     );
   }

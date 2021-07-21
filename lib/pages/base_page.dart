@@ -1,5 +1,7 @@
 import 'package:app_control_ayudante/controllers/auth_controller.dart';
+import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/controllers/menu_controller.dart';
+import 'package:app_control_ayudante/controllers/registros_controller.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:app_control_ayudante/pages/asistencia_page.dart';
 import 'package:app_control_ayudante/pages/ayudantia_page.dart';
@@ -12,8 +14,11 @@ import 'package:get/get.dart';
 class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final userCtrl = Get.find<UserController>();
-    final menuCtrl = Get.put(MenuController(), permanent: true);
+    // Get.find<UserController>();
+    final menuCtrl = Get.put(MenuController());
+    Get.put(RegistrosController());
+    Get.put(MateriasFacultadController());
+
     PageController pageCtrl =
         PageController(initialPage: menuCtrl.selectMenuOpt.value);
     final size = MediaQuery.of(context).size;

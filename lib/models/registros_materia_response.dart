@@ -13,9 +13,10 @@ String registrosMateriaResponseToJson(RegistrosMateriaResponse data) =>
     json.encode(data.toJson());
 
 class RegistrosMateriaResponse {
-  RegistrosMateriaResponse({this.ok, this.registros, this.msg});
+  RegistrosMateriaResponse(
+      {required this.ok, required this.registros, required this.msg});
 
-  bool? ok;
+  bool ok;
   List<Registro>? registros;
   String? msg;
 

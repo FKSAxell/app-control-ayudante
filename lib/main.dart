@@ -38,9 +38,77 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Material App',
-        initialRoute: 'loading',
-        getPages: appRoutes);
+      debugShowCheckedModeBanner: false,
+      title: 'Material App',
+      initialRoute: 'loading',
+      getPages: appRoutes,
+    );
   }
 }
+
+
+
+
+//  Container(
+//                       padding: EdgeInsets.only(top: 20),
+//                       child: Row(
+//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                         children: [
+//                           BoxMateria(
+//                             text: "Fundamentos de Programación",
+//                             color: Color(0xfffd79a8),
+//                           ),
+//                           BoxMateria(
+//                             text: "Algebra Lineal",
+//                             color: Color(0xff2ecc71),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                     Container(
+//                       padding: EdgeInsets.only(top: 20),
+//                       child: Row(
+//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                         children: [
+//                           BoxMateria(
+//                             text: "Física I",
+//                             color: Color(0xff9b59b6),
+//                           ),
+//                           BoxMateria(
+//                             text: "Biología",
+//                             color: Color(0xffe67e22),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                     Container(
+//                       padding: EdgeInsets.only(top: 20),
+//                       child: Row(
+//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                         children: [
+//                           BoxMateria(
+//                             text: "Química",
+//                             color: Color(0xffe74c3c),
+//                           ),
+//                           BoxMateria(
+//                             text: "Ecología",
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                     Container(
+//                       padding: EdgeInsets.only(top: 20),
+//                       child: Row(
+//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                         children: [
+//                           BoxMateria(
+//                             text: "Ecuaciones Diferenciales",
+//                             color: Color(0xfff1c40f),
+//                           ),
+//                           BoxMateria(
+//                             text: "Cálculo I",
+//                             color: Color(0xff34495e),
+//                           ),
+//                         ],
+//                       ),
+//                     ),

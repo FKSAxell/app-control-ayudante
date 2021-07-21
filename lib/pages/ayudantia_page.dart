@@ -1,5 +1,7 @@
-import 'package:app_control_ayudante/helpers/MyBehavior%20.dart';
-import 'package:app_control_ayudante/helpers/materias.dart';
+import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
+import 'package:app_control_ayudante/helpers/MyBehavior.dart';
+
+import 'package:app_control_ayudante/models/materias_facultad_response.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +16,9 @@ class _AyudantiaPageState extends State<AyudantiaPage>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    final matFacCtrl = Get.find<MateriasFacultadController>();
     final size = MediaQuery.of(context).size;
-    TabController tabCtrl =
-        TabController(length: 8, vsync: this, initialIndex: 0);
+
     return Container(
       color: Color(0xff243165),
       child: Stack(
@@ -127,67 +129,54 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                           highlightColor: Colors.transparent,
                           splashColor: Colors.transparent,
                         ),
-                        child: TabBar(
-                          isScrollable: true,
-                          physics: BouncingScrollPhysics(),
-                          controller: tabCtrl,
-                          labelColor: Colors.white,
-                          labelStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          unselectedLabelColor: Color(0xff47525E),
-                          indicator: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25.0),
-                            color: Color(0xff243165),
-                          ),
-                          onTap: (value) {},
-                          tabs: <Widget>[
-                            Tab(
-                              child: Text("FCNM"),
-                            ),
-                            Tab(
-                              child: Text("FIEC"),
-                            ),
-                            Tab(
-                              child: Text("FADCOM"),
-                            ),
-                            Tab(
-                              child: Text("FCSH"),
-                            ),
-                            Tab(
-                              child: Text("FCV"),
-                            ),
-                            Tab(
-                              child: Text("FIMCP"),
-                            ),
-                            Tab(
-                              child: Text("FICT"),
-                            ),
-                            Tab(
-                              child: Text("FIMCM"),
-                            ),
-                          ],
-                        ),
+                        child:
+                            Obx(() => (matFacCtrl.materiasFacultad.length != 0)
+                                ? TabBar(
+                                    isScrollable: true,
+                                    physics: BouncingScrollPhysics(),
+                                    controller: matFacCtrl.tabCtrl,
+                                    labelColor: Colors.white,
+                                    labelStyle: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    unselectedLabelColor: Color(0xff47525E),
+                                    indicator: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      color: Color(0xff243165),
+                                    ),
+                                    onTap: (value) {},
+                                    tabs: matFacCtrl.materiasFacultad
+                                        .map(
+                                          (facultad) => Tab(
+                                            child: Text(
+                                              facultad.codigo,
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
+                                  )
+                                : CircularProgressIndicator()),
                       ),
                       SizedBox(
                         height: 15,
                       ),
                       Expanded(
-                        child: TabBarView(
-                          controller: tabCtrl,
-                          children: [
-                            Materias(controller: controller),
-                            Materias(controller: controller),
-                            Materias(controller: controller),
-                            Materias(controller: controller),
-                            Materias(controller: controller),
-                            Materias(controller: controller),
-                            Materias(controller: controller),
-                            Materias(controller: controller),
-                          ],
-                        ),
-                      )
+                          child: Obx(
+                        () => (matFacCtrl.materiasFacultad.length != 0)
+                            ? TabBarView(
+                                controller: matFacCtrl.tabCtrl,
+                                children: matFacCtrl.materiasFacultad
+                                    .map(
+                                      (facultad) => Materias(
+                                        controller: controller,
+                                        materias: facultad.materia,
+                                      ),
+                                    )
+                                    .toList(),
+                              )
+                            : Container(),
+                      ))
                     ],
                   ),
                 );
@@ -204,8 +193,10 @@ class Materias extends StatelessWidget {
   const Materias({
     Key? key,
     required this.controller,
+    required this.materias,
   }) : super(key: key);
   final ScrollController controller;
+  final List<Materia> materias;
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +216,7 @@ class Materias extends StatelessWidget {
             onTap: () {
               // do something
             },
-            title: Text('${materias[i]}'),
+            title: Text('${materias[i].nombre}'),
           );
         },
       ),

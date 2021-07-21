@@ -1,4 +1,5 @@
 import 'package:app_control_ayudante/controllers/auth_controller.dart';
+import 'package:app_control_ayudante/controllers/registros_controller.dart';
 import 'package:app_control_ayudante/helpers/mostrar_alerta.dart';
 
 import 'package:flutter/material.dart';

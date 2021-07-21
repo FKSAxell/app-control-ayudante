@@ -1,4 +1,6 @@
 import 'package:app_control_ayudante/controllers/auth_controller.dart';
+import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
+import 'package:app_control_ayudante/controllers/registros_controller.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 
 import 'package:flutter/material.dart';
