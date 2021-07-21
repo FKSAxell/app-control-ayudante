@@ -2,6 +2,7 @@ import 'package:app_control_ayudante/controllers/materias_facultad_controller.da
 import 'package:app_control_ayudante/helpers/MyBehavior.dart';
 
 import 'package:app_control_ayudante/models/materias_facultad_response.dart';
+import 'package:app_control_ayudante/search/search_delegate.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,9 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {}, //TODO SEACH
+                  onTap: () => showSearch(
+                      context: context,
+                      delegate: MateriaSearchDelegate()), //TODO SEACH
                   child: Container(
                     padding: EdgeInsets.only(left: 15),
                     child: Row(
@@ -255,51 +258,3 @@ class AyudanteEnClase extends StatelessWidget {
     );
   }
 }
-
-//TODO SEACH IMPL
-// class TheSearch extends SearchDelegate<String> {
-//   final suggestions1 = ["https://www.google.com"];
-
-//   @override
-//   String get searchFieldLabel => "Enter a web address";
-
-//   @override
-//   List<Widget> buildActions(BuildContext context) {
-//     return [
-//       IconButton(
-//         icon: Icon(Icons.clear),
-//         onPressed: () {
-//           query = "";
-//         },
-//       )
-//     ];
-//   }
-
-//   @override
-//   Widget buildLeading(BuildContext context) {
-//     return IconButton(
-//       icon: AnimatedIcon(
-//         icon: AnimatedIcons.menu_arrow,
-//         progress: transitionAnimation,
-//       ),
-//       onPressed: () {
-//         close(context, "");
-//       },
-//     );
-//   }
-
-//   @override
-//   Widget buildResults(BuildContext context) {
-//     return Container();
-//   }
-
-//   @override
-//   Widget buildSuggestions(BuildContext context) {
-//     final suggestions = query.isEmpty ? suggestions1 : [];
-//     return ListView.builder(
-//       itemCount: suggestions.length,
-//       itemBuilder: (content, index) => ListTile(
-//           leading: Icon(Icons.arrow_left), title: Text(suggestions[index])),
-//     );
-//   }
-// }
