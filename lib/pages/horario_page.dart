@@ -1,4 +1,7 @@
+import 'package:app_control_ayudante/controllers/sesion_controller.dart';
+import 'package:app_control_ayudante/models/clases_sesiones_response.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HorarioPage extends StatefulWidget {
   @override
@@ -9,8 +12,7 @@ class _HorarioPageState extends State<HorarioPage>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    TabController tabCtrl =
-        TabController(length: 7, vsync: this, initialIndex: 0);
+    final sesCtrl = Get.find<SesionController>();
     return Column(
       children: [
         Container(
@@ -27,75 +29,71 @@ class _HorarioPageState extends State<HorarioPage>
               ),
               SizedBox(height: 10),
               Theme(
-                data: ThemeData(
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                ),
-                child: TabBar(
-                  isScrollable: true,
-                  physics: BouncingScrollPhysics(),
-                  controller: tabCtrl,
-                  labelColor: Colors.white,
-                  labelStyle: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                  data: ThemeData(
+                    highlightColor: Colors.transparent,
+                    splashColor: Colors.transparent,
                   ),
-                  unselectedLabelColor: Color(0xff47525E),
-                  indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      25.0,
-                    ),
-                    color: Color(0xff243165),
-                  ),
-                  tabs: <Widget>[
-                    Tab(
-                      child: Text("01"),
-                      icon: Text("Lun"),
-                    ),
-                    Tab(
-                      child: Text("02"),
-                      icon: Text("Mar"),
-                    ),
-                    Tab(
-                      child: Text("03"),
-                      icon: Text("Mie"),
-                    ),
-                    Tab(
-                      child: Text("04"),
-                      icon: Text("Juv"),
-                    ),
-                    Tab(
-                      child: Text("05"),
-                      icon: Text("Vie"),
-                    ),
-                    Tab(
-                      child: Text("06"),
-                      icon: Text("Sab"),
-                    ),
-                    Tab(
-                      child: Text("07"),
-                      icon: Text("Dog"),
-                    ),
-                  ],
-                ),
-              ),
+                  child: Obx(() => (sesCtrl.sesiones.length != 0)
+                      ? TabBar(
+                          isScrollable: true,
+                          physics: BouncingScrollPhysics(),
+                          controller: sesCtrl.tabCtrl,
+                          labelColor: Colors.white,
+                          labelStyle: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          unselectedLabelColor: Color(0xff47525E),
+                          indicator: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              25.0,
+                            ),
+                            color: Color(0xff243165),
+                          ),
+                          tabs: <Widget>[
+                            Tab(
+                              child: Text("19"),
+                              icon: Text("Lun"),
+                            ),
+                            Tab(
+                              child: Text("20"),
+                              icon: Text("Mar"),
+                            ),
+                            Tab(
+                              child: Text("21"),
+                              icon: Text("Mie"),
+                            ),
+                            Tab(
+                              child: Text("22"),
+                              icon: Text("Juv"),
+                            ),
+                            Tab(
+                              child: Text("23"),
+                              icon: Text("Vie"),
+                            ),
+                            Tab(
+                              child: Text("24"),
+                              icon: Text("Sab"),
+                            ),
+                            Tab(
+                              child: Text("25"),
+                              icon: Text("Dog"),
+                            ),
+                          ],
+                        )
+                      : CircularProgressIndicator())),
             ],
           ),
         ),
         Expanded(
-          child: TabBarView(
-            controller: tabCtrl,
-            children: [
-              Dia(),
-              Dia(),
-              Dia(),
-              Dia(),
-              Dia(),
-              Dia(),
-              Dia(),
-            ],
-          ),
-        )
+            child: Obx(() => (sesCtrl.sesiones.length != 0)
+                ? TabBarView(
+                    controller: sesCtrl.tabCtrl,
+                    children: sesCtrl.sesiones
+                        .map((sesiones) => Dia(sesiones: sesiones.sesion))
+                        .toList(),
+                  )
+                : Container()))
       ],
     );
   }
@@ -104,18 +102,19 @@ class _HorarioPageState extends State<HorarioPage>
 class Dia extends StatelessWidget {
   const Dia({
     Key? key,
+    required this.sesiones,
   }) : super(key: key);
-
+  final List<Sesion> sesiones;
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xffE5E9F2),
       child: ListView.builder(
-        itemCount: 10,
+        itemCount: sesiones.length,
         physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           return Clase(
-            index: index,
+            sesion: sesiones[index],
           );
         },
       ),
@@ -126,9 +125,9 @@ class Dia extends StatelessWidget {
 class Clase extends StatelessWidget {
   const Clase({
     Key? key,
-    required this.index,
+    required this.sesion,
   }) : super(key: key);
-  final int index;
+  final Sesion sesion;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -146,20 +145,20 @@ class Clase extends StatelessWidget {
       child: ListTile(
         onTap: () {},
         title: Text(
-          "Fundamentos de Programación",
+          sesion.ayudantia.materia.nombre,
           style: TextStyle(
             color: Color(0xff47525E),
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(
-          "Axell Concha",
+          sesion.ayudantia.usuario.nombre,
           style: TextStyle(
             color: Color(0xff72777B),
           ),
         ),
         trailing: Text(
-          "${index + 8}:30",
+          "${sesion.horaInicio}:${sesion.minutoInicio}",
           style: TextStyle(
             color: Color(0xff47525E),
             fontSize: 15,
