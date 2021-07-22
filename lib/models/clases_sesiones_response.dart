@@ -4,8 +4,6 @@
 
 import 'dart:convert';
 
-import 'ayudantia.dart';
-
 ClasesPorSesionesResponse clasesPorSesionesResponseFromJson(String str) =>
     ClasesPorSesionesResponse.fromJson(json.decode(str));
 
@@ -116,6 +114,130 @@ class Sesion {
         "__v": v,
         "clase": clase.toJson(),
         "favorito": favorito.toJson(),
+      };
+}
+
+class Ayudantia {
+  Ayudantia({
+    required this.id,
+    required this.estado,
+    required this.usuario,
+    required this.materia,
+    required this.fechaInicio,
+    required this.fechaFin,
+    required this.fechaCreacion,
+    required this.fechaActualizacion,
+    required this.v,
+  });
+
+  String id;
+  String estado;
+  Usuario usuario;
+  Materia materia;
+  DateTime fechaInicio;
+  DateTime fechaFin;
+  DateTime fechaCreacion;
+  DateTime fechaActualizacion;
+  int v;
+
+  factory Ayudantia.fromJson(Map<String, dynamic> json) => Ayudantia(
+        id: json["_id"],
+        estado: json["estado"],
+        usuario: Usuario.fromJson(json["usuario"]),
+        materia: Materia.fromJson(json["materia"]),
+        fechaInicio: DateTime.parse(json["fechaInicio"]),
+        fechaFin: DateTime.parse(json["fechaFin"]),
+        fechaCreacion: DateTime.parse(json["fechaCreacion"]),
+        fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
+        v: json["__v"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "estado": estado,
+        "usuario": usuario.toJson(),
+        "materia": materia.toJson(),
+        "fechaInicio": fechaInicio.toIso8601String(),
+        "fechaFin": fechaFin.toIso8601String(),
+        "fechaCreacion": fechaCreacion.toIso8601String(),
+        "fechaActualizacion": fechaActualizacion.toIso8601String(),
+        "__v": v,
+      };
+}
+
+class Usuario {
+  Usuario({
+    required this.estado,
+    required this.nombre,
+    required this.email,
+    required this.fechaCreacion,
+    required this.fechaActualizacion,
+  });
+
+  String estado;
+  String nombre;
+  String email;
+  DateTime fechaCreacion;
+  DateTime fechaActualizacion;
+
+  factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
+        estado: json["estado"],
+        nombre: json["nombre"],
+        email: json["email"],
+        fechaCreacion: DateTime.parse(json["fechaCreacion"]),
+        fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "estado": estado,
+        "nombre": nombre,
+        "email": email,
+        "fechaCreacion": fechaCreacion.toIso8601String(),
+        "fechaActualizacion": fechaActualizacion.toIso8601String(),
+      };
+}
+
+class Materia {
+  Materia({
+    required this.estado,
+    required this.id,
+    required this.nombre,
+    required this.codigo,
+    required this.facultad,
+    required this.fechaCreacion,
+    required this.fechaActualizacion,
+    required this.v,
+  });
+
+  String estado;
+  String id;
+  String nombre;
+  String codigo;
+  String facultad;
+  DateTime fechaCreacion;
+  DateTime fechaActualizacion;
+  int v;
+
+  factory Materia.fromJson(Map<String, dynamic> json) => Materia(
+        estado: json["estado"],
+        id: json["_id"],
+        nombre: json["nombre"],
+        codigo: json["codigo"],
+        facultad: json["facultad"],
+        fechaCreacion: DateTime.parse(json["fechaCreacion"]),
+        fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
+        v: json["__v"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "estado": estado,
+        "_id": id,
+        "nombre": nombre,
+        "codigo": codigo,
+        "facultad": facultad,
+        "fechaCreacion": fechaCreacion.toIso8601String(),
+        "fechaActualizacion": fechaActualizacion.toIso8601String(),
+        "__v": v,
       };
 }
 
