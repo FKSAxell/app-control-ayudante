@@ -76,7 +76,10 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                     scrollDirection: Axis.horizontal,
                     physics: BouncingScrollPhysics(),
                     children: [
-                      AyudanteEnClase(),
+                      GestureDetector(
+                        onTap: () => Get.toNamed("materia"),
+                        child: AyudanteEnClase(),
+                      ),
                       AyudanteEnClase(),
                       AyudanteEnClase(),
                       AyudanteEnClase(),
