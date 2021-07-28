@@ -1,4 +1,6 @@
 import 'package:app_control_ayudante/global/environment.dart';
+import 'package:app_control_ayudante/models/ayudantes_materia_response.dart'
+    as ayudantesMateriaResponse;
 import 'package:app_control_ayudante/models/materias_facultad_response.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -52,6 +54,26 @@ class MateriasFacultadController extends GetxController
         materias.addAll(materiasTodas);
       }
 
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> obtenerAyudantesPorMateria(String idMateria) async {
+    final token = await AuthController.getToken();
+
+    final resp = await http.get(
+      Uri.parse('${Enviroment.apiUrl}/materia/ayudantes/$idMateria'),
+      headers: {
+        'Content-type': 'application/json',
+        'x-token': token!,
+      },
+    );
+    if (resp.statusCode == 200) {
+      final ayudantesMateriaRes = ayudantesMateriaResponse
+          .ayudantesPorMateriaResponseFromJson(resp.body);
+      print(ayudantesMateriaRes);
       return true;
     } else {
       return false;

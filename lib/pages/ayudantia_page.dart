@@ -206,6 +206,7 @@ class Materias extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final matFacCtrl = Get.find<MateriasFacultadController>();
     return ScrollConfiguration(
       behavior: MyBehavior(),
       child: ListView.separated(
@@ -218,7 +219,9 @@ class Materias extends StatelessWidget {
         controller: controller,
         itemBuilder: (_, i) {
           return ListTile(
-            onTap: () {},
+            onTap: () async {
+              await matFacCtrl.obtenerAyudantesPorMateria(materias[i].id);
+            },
             title: Text('${materias[i].nombre}'),
           );
         },

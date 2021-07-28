@@ -55,6 +55,7 @@ class _EntradaState extends State<Entrada> {
         keyboardType: this.widget.keyboardType,
         controller: this.widget.textController,
         obscureText: _isHidden,
+        textAlignVertical: TextAlignVertical.bottom,
         decoration: InputDecoration(
             prefixIcon: Icon(this.widget.icon),
             focusedBorder: InputBorder.none,
@@ -63,8 +64,12 @@ class _EntradaState extends State<Entrada> {
             suffix: (this.widget.isPassword)
                 ? InkWell(
                     onTap: _togglePasswordView,
-                    child: Icon(
-                      _isHidden ? Icons.visibility : Icons.visibility_off,
+                    child: Container(
+                      child: Icon(
+                        _isHidden ? Icons.visibility : Icons.visibility_off,
+                        color: Color(0xff243165),
+                        size: 20,
+                      ),
                     ),
                   )
                 : null),
