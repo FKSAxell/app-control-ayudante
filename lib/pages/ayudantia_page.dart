@@ -76,10 +76,6 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                     scrollDirection: Axis.horizontal,
                     physics: BouncingScrollPhysics(),
                     children: [
-                      GestureDetector(
-                        onTap: () => Get.toNamed("materia"),
-                        child: AyudanteEnClase(),
-                      ),
                       AyudanteEnClase(),
                       AyudanteEnClase(),
                       AyudanteEnClase(),
@@ -218,11 +214,21 @@ class Materias extends StatelessWidget {
         itemCount: materias.length,
         controller: controller,
         itemBuilder: (_, i) {
-          return ListTile(
-            onTap: () async {
-              await matFacCtrl.obtenerAyudantesPorMateria(materias[i].id);
-            },
-            title: Text('${materias[i].nombre}'),
+          return Material(
+            color: Colors.transparent,
+            child: ListTile(
+              onTap: () {
+                matFacCtrl.ayudantes.value = [];
+                matFacCtrl.favorito.value = false;
+                matFacCtrl.obtenerAyudantesPorMateria(materias[i].id);
+                matFacCtrl.obtenerEstadoMateriaRegistarada(materias[i].id);
+                Get.toNamed("materia", arguments: [
+                  materias[i].id,
+                  materias[i].nombre
+                ]); //TODO: Problema de tener varias class Materia1
+              },
+              title: Text('${materias[i].nombre}'),
+            ),
           );
         },
       ),
@@ -243,10 +249,10 @@ class AyudanteEnClase extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 25,
-            backgroundColor: Colors.yellow,
+            backgroundColor: Colors.blue,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25),
-              child: Image(image: AssetImage("assets/test/axell.jpg")),
+              child: Icon(Icons.person),
             ),
           ),
           SizedBox(

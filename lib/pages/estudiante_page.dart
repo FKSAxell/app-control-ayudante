@@ -1,3 +1,4 @@
+import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/controllers/registros_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
@@ -10,6 +11,7 @@ class EstudiantePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final userCtrl = Get.find<UserController>();
     final regCtrl = Get.find<RegistrosController>();
+    final matFacCtrl = Get.find<MateriasFacultadController>();
     final size = MediaQuery.of(context).size;
     return Container(
       color: Color(0xffE5E9F2),
@@ -30,6 +32,19 @@ class EstudiantePage extends StatelessWidget {
                           itemBuilder: (context, index) {
                             List<BoxMateria> boxs = [
                               ...regCtrl.registros[index].map((e) => BoxMateria(
+                                    onTap: () {
+                                      matFacCtrl.ayudantes.value = [];
+                                      matFacCtrl.favorito.value = false;
+                                      matFacCtrl.obtenerAyudantesPorMateria(
+                                          e.materia.id);
+                                      matFacCtrl
+                                          .obtenerEstadoMateriaRegistarada(
+                                              e.materia.id);
+                                      Get.toNamed("materia", arguments: [
+                                        e.materia.id,
+                                        e.materia.nombre
+                                      ]); //TODO: Problema de tener varias class Materia2
+                                    },
                                     text: e.materia.nombre,
                                   ))
                             ];
@@ -56,10 +71,10 @@ class EstudiantePage extends StatelessWidget {
                   alignment: Alignment.center,
                   child: CircleAvatar(
                     radius: 55,
-                    backgroundColor: Colors.yellow,
+                    backgroundColor: Colors.blue,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(55),
-                      child: Image(image: AssetImage("assets/test/axell.jpg")),
+                      child: Icon(Icons.person),
                     ),
                   ),
                 ),
@@ -166,10 +181,12 @@ class MateriaRow extends StatelessWidget {
 class BoxMateria extends StatelessWidget {
   final Color color;
   final String text;
+  final Function onTap;
   const BoxMateria({
     Key? key,
     this.color: Colors.blue,
     required this.text,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -188,9 +205,7 @@ class BoxMateria extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          onTap: () {
-            print("Materia ${this.text}");
-          },
+          onTap: () => this.onTap(),
         ),
       ),
     );

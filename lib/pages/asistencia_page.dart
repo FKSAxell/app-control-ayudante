@@ -166,10 +166,10 @@ class Clase extends StatelessWidget {
         ),
         leading: CircleAvatar(
           radius: 25,
-          backgroundColor: Colors.yellow,
+          backgroundColor: Colors.blue,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(25),
-            child: Image(image: AssetImage("assets/test/axell.jpg")),
+            child: Icon(Icons.person),
           ),
         ),
       ),

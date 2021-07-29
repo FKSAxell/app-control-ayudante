@@ -1,5 +1,8 @@
+import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/helpers/sliver_persisten_header.dart';
+import 'package:app_control_ayudante/models/ayudantes_materia_response.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MateriaPage extends StatefulWidget {
   const MateriaPage({Key? key}) : super(key: key);
@@ -11,6 +14,9 @@ class MateriaPage extends StatefulWidget {
 class _MateriaPageState extends State<MateriaPage> {
   @override
   Widget build(BuildContext context) {
+    final matFacCtrl = Get.find<MateriasFacultadController>();
+    final List<String> argumentos = Get.arguments;
+
     return Scaffold(
       backgroundColor: Color(0xffE5E9F2),
       body: CustomScrollView(
@@ -23,12 +29,20 @@ class _MateriaPageState extends State<MateriaPage> {
             pinned: true,
             expandedHeight: 160.0,
             actions: [
-              IconButton(
-                  onPressed: () => {}, icon: Icon(Icons.star_border_rounded))
+              Obx(() => (matFacCtrl.loading.value)
+                  ? IconButton(
+                      onPressed: () async => {
+                            await matFacCtrl.obtenerSetEstadoMateriaRegistarada(
+                                argumentos[0])
+                          },
+                      icon: Icon((matFacCtrl.favorito.value)
+                          ? Icons.star
+                          : Icons.star_outline))
+                  : Container())
             ],
-            flexibleSpace: const FlexibleSpaceBar(
+            flexibleSpace: FlexibleSpaceBar(
               title: Text(
-                'Fundamentos de Programación',
+                argumentos[1],
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -48,8 +62,7 @@ class _MateriaPageState extends State<MateriaPage> {
                     Container(
                       margin: EdgeInsets.only(top: 15),
                       child: TopAyudante(
-                        imagen:
-                            Image(image: AssetImage("assets/test/axell.jpg")),
+                        imagen: Icon(Icons.person),
                         nombre: "Axell C.",
                         calificacion: "4.9",
                         color: Color(0xffbfc1c1),
@@ -62,8 +75,7 @@ class _MateriaPageState extends State<MateriaPage> {
                     Container(
                       margin: EdgeInsets.only(top: 5),
                       child: TopAyudante(
-                        imagen:
-                            Image(image: AssetImage("assets/test/axell.jpg")),
+                        imagen: Icon(Icons.person),
                         nombre: "Zarinna A.",
                         calificacion: "5.0",
                         color: Color(0xffffbf00),
@@ -76,8 +88,7 @@ class _MateriaPageState extends State<MateriaPage> {
                     Container(
                       margin: EdgeInsets.only(top: 15),
                       child: TopAyudante(
-                        imagen:
-                            Image(image: AssetImage("assets/test/axell.jpg")),
+                        imagen: Icon(Icons.person),
                         nombre: "David Py",
                         calificacion: "4.8",
                         color: Color(0xff9c5221),
@@ -89,44 +100,73 @@ class _MateriaPageState extends State<MateriaPage> {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return ListTile(
-                  onTap: () {},
-                  title: Text(
-                    "Axell Concha",
-                    style: TextStyle(
-                      color: Color(0xff47525E),
-                      fontWeight: FontWeight.bold,
-                    ),
+          Obx(
+            () => (matFacCtrl.loading.value)
+                ? (matFacCtrl.ayudantes.isNotEmpty)
+                    ? SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                            Ayudante ayudante = matFacCtrl.ayudantes[index];
+                            return ListTile(
+                              onTap: () {},
+                              title: Text(
+                                ayudante.usuario.nombre,
+                                style: TextStyle(
+                                  color: Color(0xff47525E),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              subtitle: Text(
+                                "Axell Concha",
+                                style: TextStyle(
+                                  color: Color(0xff72777B),
+                                ),
+                              ),
+                              trailing: Text(
+                                "8:30",
+                                style: TextStyle(
+                                  color: Color(0xff47525E),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              leading: CircleAvatar(
+                                radius: 25,
+                                backgroundColor: Colors.blue,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(25),
+                                  child: Icon(Icons.person),
+                                ),
+                              ),
+                            );
+                          },
+                          childCount: matFacCtrl.ayudantes.length,
+                        ),
+                      )
+                    : SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                            (BuildContext context, int index) => Container(
+                                  height: 300,
+                                  child: Center(
+                                    child: Text(
+                                      "No hay ayudantes...\nAsí de difícil es la materia 😢",
+                                      style: TextStyle(fontSize: 20),
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.clip,
+                                    ),
+                                  ),
+                                ),
+                            childCount: 1),
+                      )
+                : SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) =>
+                            LinearProgressIndicator(
+                              backgroundColor: Color(0xffE5E9F2),
+                              color: Color(0xff243165),
+                            ),
+                        childCount: 1),
                   ),
-                  subtitle: Text(
-                    "Axell Concha",
-                    style: TextStyle(
-                      color: Color(0xff72777B),
-                    ),
-                  ),
-                  trailing: Text(
-                    "8:30",
-                    style: TextStyle(
-                      color: Color(0xff47525E),
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  leading: CircleAvatar(
-                    radius: 25,
-                    backgroundColor: Colors.yellow,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Image(image: AssetImage("assets/test/axell.jpg")),
-                    ),
-                  ),
-                );
-              },
-              childCount: 20,
-            ),
           ),
         ],
       ),
@@ -200,72 +240,6 @@ class TopAyudante extends StatelessWidget {
           ],
         )
       ],
-    );
-  }
-}
-
-class TopAyudantes extends StatelessWidget {
-  const TopAyudantes({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 80,
-        child: PageView.builder(
-          itemCount: 5,
-          controller: PageController(
-            viewportFraction: 0.8,
-          ),
-          itemBuilder: (context, index) => Container(
-            margin: EdgeInsets.only(right: 20),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  offset: Offset(1, 1),
-                ),
-              ],
-            ),
-            child: ListTile(
-              onTap: () {},
-              title: Text(
-                "Axell Concha",
-                style: TextStyle(
-                  color: Color(0xff47525E),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              subtitle: Text(
-                "Axell Concha",
-                style: TextStyle(
-                  color: Color(0xff72777B),
-                ),
-              ),
-              trailing: Text(
-                "8:30",
-                style: TextStyle(
-                  color: Color(0xff47525E),
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              leading: CircleAvatar(
-                radius: 25,
-                backgroundColor: Colors.yellow,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(25),
-                  child: Image(image: AssetImage("assets/test/axell.jpg")),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

@@ -134,7 +134,7 @@ class Clase extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -167,10 +167,10 @@ class Clase extends StatelessWidget {
         ),
         leading: CircleAvatar(
           radius: 25,
-          backgroundColor: Colors.yellow,
+          backgroundColor: Colors.blue,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(25),
-            child: Image(image: AssetImage("assets/test/axell.jpg")),
+            child: Icon(Icons.person),
           ),
         ),
       ),
