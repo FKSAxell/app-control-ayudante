@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'registro.dart';
+import 'package:app_control_ayudante/models/registro_model.dart';
 
 RegistrosMateriaResponse registrosMateriaResponseFromJson(String str) =>
     RegistrosMateriaResponse.fromJson(json.decode(str));

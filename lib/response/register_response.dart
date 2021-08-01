@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app_control_ayudante/models/usuario.dart';
+import 'package:app_control_ayudante/models/usuario_model.dart';
 
 RegisterResponse registerResponseFromJson(String str) =>
     RegisterResponse.fromJson(json.decode(str));

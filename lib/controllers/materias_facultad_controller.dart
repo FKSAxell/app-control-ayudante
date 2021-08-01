@@ -1,9 +1,13 @@
 import 'package:app_control_ayudante/controllers/registros_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
-import 'package:app_control_ayudante/models/ayudantes_materia_response.dart'
-    as ayudantesMateriaResponse;
-import 'package:app_control_ayudante/models/materias_facultad_response.dart';
-import 'package:app_control_ayudante/models/result_response.dart';
+import 'package:app_control_ayudante/models/ayudantia_model.dart';
+
+import 'package:app_control_ayudante/models/facultad_model.dart';
+import 'package:app_control_ayudante/models/materia_model.dart';
+import 'package:app_control_ayudante/response/ayudantes_materia_response.dart';
+
+import 'package:app_control_ayudante/response/materias_facultad_response.dart';
+import 'package:app_control_ayudante/response/result_response.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -14,10 +18,9 @@ class MateriasFacultadController extends GetxController
     with SingleGetTickerProviderMixin {
   RxBool loading = true.obs;
   RxBool favorito = false.obs;
-  List<Facultade> materiasFacultad = <Facultade>[].obs;
+  List<Facultad> materiasFacultad = <Facultad>[].obs;
   List<Materia> materias = <Materia>[].obs;
-  RxList<ayudantesMateriaResponse.Ayudante> ayudantes =
-      <ayudantesMateriaResponse.Ayudante>[].obs;
+  RxList<Ayudantia> ayudantes = <Ayudantia>[].obs;
   TabController? tabCtrl;
   @override
   void onInit() async {
@@ -52,9 +55,9 @@ class MateriasFacultadController extends GetxController
       if (registrosMateriaResponse.ok) {
         materiasFacultad.addAll(registrosMateriaResponse.facultades);
         List<Materia> materiasTodas = [];
-        for (Facultade facultad in registrosMateriaResponse.facultades) {
-          List<Materia> materiasTMP = facultad.materia;
-          materiasTodas = [...materiasTodas, ...materiasTMP];
+        for (Facultad facultad in registrosMateriaResponse.facultades) {
+          List<Materia>? materiasTMP = facultad.materia;
+          materiasTodas = [...materiasTodas, ...materiasTMP!];
         }
 
         materias.addAll(materiasTodas);
@@ -79,8 +82,8 @@ class MateriasFacultadController extends GetxController
     );
     this.loading.value = true;
     if (resp.statusCode == 200) {
-      final ayudantesMateriaRes = ayudantesMateriaResponse
-          .ayudantesPorMateriaResponseFromJson(resp.body);
+      final ayudantesMateriaRes =
+          ayudantesPorMateriaResponseFromJson(resp.body);
       ayudantes.value = [...ayudantesMateriaRes.ayudantes];
 
       return true;

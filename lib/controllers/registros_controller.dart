@@ -1,7 +1,7 @@
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
-import 'package:app_control_ayudante/models/registro.dart';
-import 'package:app_control_ayudante/models/registros_materia_response.dart';
+import 'package:app_control_ayudante/models/registro_model.dart';
+import 'package:app_control_ayudante/response/registros_materia_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:quiver/iterables.dart';
@@ -27,7 +27,7 @@ class RegistrosController extends GetxController {
     final token = await AuthController.getToken();
     final userCtrl = Get.find<UserController>();
     final resp = await http.get(
-      Uri.parse('${Enviroment.apiUrl}/materia/${userCtrl.usuario.value!.uid}'),
+      Uri.parse('${Enviroment.apiUrl}/materia/${userCtrl.usuario.value!.id}'),
       headers: {
         'Content-type': 'application/json',
         'x-token': token!,

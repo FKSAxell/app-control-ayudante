@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app_control_ayudante/models/usuario.dart';
+import 'package:app_control_ayudante/models/usuario_model.dart';
 
 LoginResponse loginResponseFromJson(String str) =>
     LoginResponse.fromJson(json.decode(str));

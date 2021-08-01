@@ -1,5 +1,5 @@
 import 'package:app_control_ayudante/controllers/sesion_controller.dart';
-import 'package:app_control_ayudante/models/clases_sesiones_response.dart';
+import 'package:app_control_ayudante/models/sesion_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -145,14 +145,14 @@ class Clase extends StatelessWidget {
       child: ListTile(
         onTap: () {},
         title: Text(
-          sesion.ayudantia.materia.nombre,
+          sesion.ayudantia!.materia!.nombre!,
           style: TextStyle(
             color: Color(0xff47525E),
             fontWeight: FontWeight.bold,
           ),
         ),
         subtitle: Text(
-          sesion.ayudantia.usuario.nombre,
+          sesion.ayudantia!.usuario!.nombre!,
           style: TextStyle(
             color: Color(0xff72777B),
           ),

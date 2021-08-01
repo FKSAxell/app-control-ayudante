@@ -1,14 +1,14 @@
-import 'materia.dart';
-import 'usuario.dart';
+import 'dart:convert';
 
-class Ayudantia {
-  Ayudantia({
+Favorito materiaFromJson(String str) => Favorito.fromJson(json.decode(str));
+String materiaToJson(Favorito data) => json.encode(data.toJson());
+
+class Favorito {
+  Favorito({
     required this.id,
     required this.estado,
     required this.usuario,
-    required this.materia,
-    required this.fechaInicio,
-    required this.fechaFin,
+    required this.sesion,
     required this.fechaCreacion,
     required this.fechaActualizacion,
     required this.v,
@@ -16,21 +16,17 @@ class Ayudantia {
 
   String id;
   String estado;
-  Usuario usuario;
-  Materia materia;
-  DateTime fechaInicio;
-  DateTime fechaFin;
+  String usuario;
+  String sesion;
   DateTime fechaCreacion;
   DateTime fechaActualizacion;
   int v;
 
-  factory Ayudantia.fromJson(Map<String, dynamic> json) => Ayudantia(
+  factory Favorito.fromJson(Map<String, dynamic> json) => Favorito(
         id: json["_id"],
         estado: json["estado"],
-        usuario: Usuario.fromJson(json["usuario"]),
-        materia: Materia.fromJson(json["materia"]),
-        fechaInicio: DateTime.parse(json["fechaInicio"]),
-        fechaFin: DateTime.parse(json["fechaFin"]),
+        usuario: json["usuario"],
+        sesion: json["sesion"],
         fechaCreacion: DateTime.parse(json["fechaCreacion"]),
         fechaActualizacion: DateTime.parse(json["fechaActualizacion"]),
         v: json["__v"],
@@ -39,10 +35,8 @@ class Ayudantia {
   Map<String, dynamic> toJson() => {
         "_id": id,
         "estado": estado,
-        "usuario": usuario.toJson(),
-        "materia": materia.toJson(),
-        "fechaInicio": fechaInicio.toIso8601String(),
-        "fechaFin": fechaFin.toIso8601String(),
+        "usuario": usuario,
+        "sesion": sesion,
         "fechaCreacion": fechaCreacion.toIso8601String(),
         "fechaActualizacion": fechaActualizacion.toIso8601String(),
         "__v": v,

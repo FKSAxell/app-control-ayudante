@@ -107,7 +107,7 @@ class _MenuPrincipal extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: Color(0xff243165),
                   child: Text(
-                    userCtrl.usuario.value!.nombre
+                    userCtrl.usuario.value!.nombre!
                         .substring(0, 2)
                         .toUpperCase(),
                     style: TextStyle(fontSize: 50, color: Colors.white),

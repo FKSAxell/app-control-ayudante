@@ -1,7 +1,7 @@
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/helpers/MyBehavior.dart';
+import 'package:app_control_ayudante/models/materia_model.dart';
 
-import 'package:app_control_ayudante/models/materias_facultad_response.dart';
 import 'package:app_control_ayudante/search/search_delegate.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -150,7 +150,7 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                                       .map(
                                         (facultad) => Tab(
                                           child: Text(
-                                            facultad.codigo,
+                                            facultad.codigo!,
                                           ),
                                         ),
                                       )
@@ -171,7 +171,7 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                                       .map(
                                         (facultad) => Materias(
                                           controller: controller,
-                                          materias: facultad.materia,
+                                          materias: facultad.materia!,
                                         ),
                                       )
                                       .toList(),
@@ -220,8 +220,8 @@ class Materias extends StatelessWidget {
               onTap: () {
                 matFacCtrl.ayudantes.value = [];
                 matFacCtrl.favorito.value = false;
-                matFacCtrl.obtenerAyudantesPorMateria(materias[i].id);
-                matFacCtrl.obtenerEstadoMateriaRegistarada(materias[i].id);
+                matFacCtrl.obtenerAyudantesPorMateria(materias[i].id!);
+                matFacCtrl.obtenerEstadoMateriaRegistarada(materias[i].id!);
                 Get.toNamed("materia", arguments: [
                   materias[i].id,
                   materias[i].nombre

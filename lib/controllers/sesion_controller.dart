@@ -1,6 +1,6 @@
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
-import 'package:app_control_ayudante/models/clases_sesiones_response.dart';
+import 'package:app_control_ayudante/response/clases_sesiones_response.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -41,7 +41,7 @@ class SesionController extends GetxController
     final token = await AuthController.getToken();
     final userCtrl = Get.find<UserController>();
     final resp = await http.get(
-      Uri.parse('${Enviroment.apiUrl}/sesion/${userCtrl.usuario.value!.uid}'),
+      Uri.parse('${Enviroment.apiUrl}/sesion/${userCtrl.usuario.value!.id}'),
       headers: {
         'Content-type': 'application/json',
         'x-token': token!,

@@ -1,4 +1,4 @@
-import 'package:app_control_ayudante/models/usuario.dart';
+import 'package:app_control_ayudante/models/usuario_model.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
@@ -9,6 +9,6 @@ class UserController extends GetxController {
     fechaCreacion: DateTime.now(),
     nombre: '',
     rol: [],
-    uid: '',
+    id: '',
   ).obs;
 }

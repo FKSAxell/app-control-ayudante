@@ -1,5 +1,5 @@
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
-import 'package:app_control_ayudante/models/materias_facultad_response.dart';
+import 'package:app_control_ayudante/models/materia_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +45,7 @@ class MateriaSearchDelegate extends SearchDelegate<String> {
     final List<Materia> suggestions = query.isEmpty
         ? matFacCtrl.materias
         : matFacCtrl.materias
-            .where((materia) => materia.nombre
+            .where((materia) => materia.nombre!
                 .toLowerCase()
                 .replaceAll("á", "a")
                 .replaceAll("é", "e")
@@ -59,7 +59,7 @@ class MateriaSearchDelegate extends SearchDelegate<String> {
       itemBuilder: (content, index) => ListTile(
           onTap: () {},
           leading: Icon(Icons.arrow_left),
-          title: Text(suggestions[index].nombre)),
+          title: Text(suggestions[index].nombre!)),
     );
   }
 }

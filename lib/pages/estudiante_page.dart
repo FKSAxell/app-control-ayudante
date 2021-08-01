@@ -36,16 +36,17 @@ class EstudiantePage extends StatelessWidget {
                                       matFacCtrl.ayudantes.value = [];
                                       matFacCtrl.favorito.value = false;
                                       matFacCtrl.obtenerAyudantesPorMateria(
-                                          e.materia.id);
+                                          e.materia!.id!);
                                       matFacCtrl
                                           .obtenerEstadoMateriaRegistarada(
-                                              e.materia.id);
+                                              e.materia!.id!);
+
                                       Get.toNamed("materia", arguments: [
-                                        e.materia.id,
-                                        e.materia.nombre
+                                        e.materia!.id,
+                                        e.materia!.nombre
                                       ]); //TODO: Problema de tener varias class Materia2
                                     },
-                                    text: e.materia.nombre,
+                                    text: e.materia!.nombre!,
                                   ))
                             ];
                             return MateriaRow(
@@ -79,7 +80,7 @@ class EstudiantePage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  userCtrl.usuario.value!.nombre,
+                  userCtrl.usuario.value!.nombre!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
@@ -87,7 +88,7 @@ class EstudiantePage extends StatelessWidget {
                 ),
                 Text(
                   (userCtrl.usuario.value!.carrera != null)
-                      ? userCtrl.usuario.value!.carrera!.nombre
+                      ? userCtrl.usuario.value!.carrera!.nombre!
                       : "No tiene Carrera",
                   style: TextStyle(
                     color: Colors.white70,
@@ -96,7 +97,7 @@ class EstudiantePage extends StatelessWidget {
                 ),
                 Text(
                   (userCtrl.usuario.value!.carrera != null)
-                      ? userCtrl.usuario.value!.carrera!.facultad.codigo
+                      ? userCtrl.usuario.value!.carrera!.facultad!.codigo!
                       : "No Tiene Facultad",
                   style: TextStyle(
                     color: Colors.white70,

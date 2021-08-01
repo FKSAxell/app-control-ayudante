@@ -1,6 +1,6 @@
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/helpers/sliver_persisten_header.dart';
-import 'package:app_control_ayudante/models/ayudantes_materia_response.dart';
+import 'package:app_control_ayudante/models/ayudantia_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +15,7 @@ class _MateriaPageState extends State<MateriaPage> {
   @override
   Widget build(BuildContext context) {
     final matFacCtrl = Get.find<MateriasFacultadController>();
-    final List<String> argumentos = Get.arguments;
+    final List<String?> argumentos = Get.arguments;
 
     return Scaffold(
       backgroundColor: Color(0xffE5E9F2),
@@ -33,7 +33,7 @@ class _MateriaPageState extends State<MateriaPage> {
                   ? IconButton(
                       onPressed: () async => {
                             await matFacCtrl.obtenerSetEstadoMateriaRegistarada(
-                                argumentos[0])
+                                argumentos[0]!)
                           },
                       icon: Icon((matFacCtrl.favorito.value)
                           ? Icons.star
@@ -42,7 +42,7 @@ class _MateriaPageState extends State<MateriaPage> {
             ],
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
-                argumentos[1],
+                argumentos[1]!,
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -63,7 +63,7 @@ class _MateriaPageState extends State<MateriaPage> {
                       margin: EdgeInsets.only(top: 15),
                       child: TopAyudante(
                         imagen: Icon(Icons.person),
-                        nombre: "Axell C.",
+                        nombre: "Plata 2",
                         calificacion: "4.9",
                         color: Color(0xffbfc1c1),
                         radius: 25,
@@ -76,7 +76,7 @@ class _MateriaPageState extends State<MateriaPage> {
                       margin: EdgeInsets.only(top: 5),
                       child: TopAyudante(
                         imagen: Icon(Icons.person),
-                        nombre: "Zarinna A.",
+                        nombre: "Oro 1",
                         calificacion: "5.0",
                         color: Color(0xffffbf00),
                         radius: 25,
@@ -89,7 +89,7 @@ class _MateriaPageState extends State<MateriaPage> {
                       margin: EdgeInsets.only(top: 15),
                       child: TopAyudante(
                         imagen: Icon(Icons.person),
-                        nombre: "David Py",
+                        nombre: "Bronce 3",
                         calificacion: "4.8",
                         color: Color(0xff9c5221),
                         radius: 25,
@@ -106,18 +106,20 @@ class _MateriaPageState extends State<MateriaPage> {
                     ? SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (BuildContext context, int index) {
-                            Ayudante ayudante = matFacCtrl.ayudantes[index];
+                            Ayudantia ayudante = matFacCtrl.ayudantes[index];
                             return ListTile(
                               onTap: () {},
                               title: Text(
-                                ayudante.usuario.nombre,
+                                ayudante.usuario!.nombre!,
                                 style: TextStyle(
                                   color: Color(0xff47525E),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               subtitle: Text(
-                                "Axell Concha",
+                                (ayudante.avg == null)
+                                    ? "⭐ -"
+                                    : "⭐ " + ayudante.avg.toString(),
                                 style: TextStyle(
                                   color: Color(0xff72777B),
                                 ),
