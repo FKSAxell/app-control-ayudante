@@ -43,7 +43,11 @@ class Ayudantia {
             ? json["_id"]["ayudantia"]
             : json["_id"],
         estado: json["estado"],
-        usuario: Usuario.fromJson(json["usuario"]),
+        usuario: json['usuario'] != null
+            ? new Usuario.fromJson(json['usuario'].runtimeType == String
+                ? {"id": json['usuario']}
+                : json['usuario'])
+            : null,
         materia: json['materia'] != null
             ? new Materia.fromJson(json['materia'].runtimeType == String
                 ? {"id": json['materia']}
