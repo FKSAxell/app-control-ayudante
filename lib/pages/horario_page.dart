@@ -1,4 +1,5 @@
 import 'package:app_control_ayudante/controllers/sesion_controller.dart';
+import 'package:app_control_ayudante/helpers/dia.dart';
 import 'package:app_control_ayudante/models/sesion_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,11 @@ class _HorarioPageState extends State<HorarioPage>
   @override
   Widget build(BuildContext context) {
     final sesCtrl = Get.find<SesionController>();
+    // Find first date and last date of THIS WEEK
+    DateTime today = DateTime.now();
+    int lunes = findFirstDateOfTheWeek(today).day;
+    // print(findLastDateOfTheWeek(today));
+
     return Column(
       children: [
         Container(
@@ -29,11 +35,12 @@ class _HorarioPageState extends State<HorarioPage>
               ),
               SizedBox(height: 10),
               Theme(
-                  data: ThemeData(
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                  ),
-                  child: Obx(() => (sesCtrl.sesiones.length != 0)
+                data: ThemeData(
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                ),
+                child: Obx(
+                  () => (sesCtrl.loading.value)
                       ? TabBar(
                           isScrollable: true,
                           physics: BouncingScrollPhysics(),
@@ -52,48 +59,53 @@ class _HorarioPageState extends State<HorarioPage>
                           ),
                           tabs: <Widget>[
                             Tab(
-                              child: Text("19"),
+                              child: Text((lunes).toString()),
                               icon: Text("Lun"),
                             ),
                             Tab(
-                              child: Text("20"),
+                              child: Text((lunes + 1).toString()),
                               icon: Text("Mar"),
                             ),
                             Tab(
-                              child: Text("21"),
+                              child: Text((lunes + 2).toString()),
                               icon: Text("Mie"),
                             ),
                             Tab(
-                              child: Text("22"),
+                              child: Text((lunes + 3).toString()),
                               icon: Text("Juv"),
                             ),
                             Tab(
-                              child: Text("23"),
+                              child: Text((lunes + 4).toString()),
                               icon: Text("Vie"),
                             ),
                             Tab(
-                              child: Text("24"),
+                              child: Text((lunes + 5).toString()),
                               icon: Text("Sab"),
                             ),
                             Tab(
-                              child: Text("25"),
+                              child: Text((lunes + 6).toString()),
                               icon: Text("Dog"),
                             ),
                           ],
                         )
-                      : CircularProgressIndicator())),
+                      : Container(),
+                ),
+              ),
             ],
           ),
         ),
         Expanded(
-            child: Obx(() => (sesCtrl.sesiones.length != 0)
+          child: Obx(
+            () => (sesCtrl.loading.value)
                 ? TabBarView(
                     controller: sesCtrl.tabCtrl,
                     children: sesCtrl.sesiones
                         .map((sesiones) => Dia(sesiones: sesiones.sesion))
                         .toList(),
                   )
-                : Container()))
+                : Center(child: CircularProgressIndicator()),
+          ),
+        )
       ],
     );
   }

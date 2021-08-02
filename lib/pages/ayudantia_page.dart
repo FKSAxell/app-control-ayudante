@@ -130,7 +130,7 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                           splashColor: Colors.transparent,
                         ),
                         child: Obx(
-                          () => (matFacCtrl.materiasFacultad.length != 0)
+                          () => (matFacCtrl.loadingMatFac.value)
                               ? TabBar(
                                   isScrollable: true,
                                   physics: BouncingScrollPhysics(),
@@ -164,7 +164,7 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                       ),
                       Expanded(
                         child: Obx(
-                          () => (matFacCtrl.materiasFacultad.length != 0)
+                          () => (matFacCtrl.loadingMatFac.value)
                               ? TabBarView(
                                   controller: matFacCtrl.tabCtrl,
                                   children: matFacCtrl.materiasFacultad

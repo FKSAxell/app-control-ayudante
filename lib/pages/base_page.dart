@@ -1,4 +1,5 @@
 import 'package:app_control_ayudante/controllers/auth_controller.dart';
+import 'package:app_control_ayudante/controllers/clase_favorito_controller.dart';
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/controllers/menu_controller.dart';
 import 'package:app_control_ayudante/controllers/registros_controller.dart';
@@ -19,6 +20,7 @@ class BasePage extends StatelessWidget {
     Get.put(RegistrosController());
     Get.put(MateriasFacultadController());
     Get.put(SesionController());
+    Get.put(ClaseFavoritoController());
 
     PageController pageCtrl =
         PageController(initialPage: menuCtrl.selectMenuOpt.value);

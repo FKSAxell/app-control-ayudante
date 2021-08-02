@@ -1,24 +1,27 @@
 import 'dart:convert';
 
+import 'package:app_control_ayudante/models/asistencia_model.dart';
 import 'package:app_control_ayudante/models/sesion_model.dart';
 
 Clase materiaFromJson(String str) => Clase.fromJson(json.decode(str));
 String materiaToJson(Clase data) => json.encode(data.toJson());
 
 class Clase {
-  Clase({
-    this.id,
-    this.estado,
-    this.sesion,
-    this.tema,
-    this.descripcion,
-    this.enlace,
-    this.ubicacion,
-    this.fechaCreacion,
-    this.fechaActualizacion,
-    this.v,
-    this.fechaClase,
-  });
+  Clase(
+      {this.id,
+      this.estado,
+      this.sesion,
+      this.tema,
+      this.descripcion,
+      this.enlace,
+      this.ubicacion,
+      this.fechaCreacion,
+      this.fechaActualizacion,
+      this.v,
+      this.fechaClase,
+
+      //tmp
+      this.asistencia});
 
   String? id;
   String? estado;
@@ -31,6 +34,8 @@ class Clase {
   DateTime? fechaActualizacion;
   int? v;
   DateTime? fechaClase;
+  //TMP
+  Asistencia? asistencia;
 
   factory Clase.fromJson(Map<String, dynamic> json) => Clase(
         id: json["_id"],

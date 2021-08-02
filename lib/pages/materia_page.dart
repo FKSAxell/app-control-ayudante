@@ -108,7 +108,9 @@ class _MateriaPageState extends State<MateriaPage> {
                           (BuildContext context, int index) {
                             Ayudantia ayudante = matFacCtrl.ayudantes[index];
                             return ListTile(
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed("ayudante", arguments: ayudante);
+                              },
                               title: Text(
                                 ayudante.usuario!.nombre!,
                                 style: TextStyle(

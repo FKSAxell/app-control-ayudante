@@ -17,6 +17,7 @@ import 'auth_controller.dart';
 class MateriasFacultadController extends GetxController
     with SingleGetTickerProviderMixin {
   RxBool loading = true.obs;
+  RxBool loadingMatFac = true.obs;
   RxBool favorito = false.obs;
   List<Facultad> materiasFacultad = <Facultad>[].obs;
   List<Materia> materias = <Materia>[].obs;
@@ -40,6 +41,7 @@ class MateriasFacultadController extends GetxController
   }
 
   Future<bool> obtenerMateriaPorFacultad() async {
+    this.loadingMatFac.value = false;
     final token = await AuthController.getToken();
 
     final resp = await http.get(
@@ -49,6 +51,7 @@ class MateriasFacultadController extends GetxController
         'x-token': token!,
       },
     );
+    this.loadingMatFac.value = true;
     if (resp.statusCode == 200) {
       final registrosMateriaResponse =
           materiasPorFacultadResponseFromJson(resp.body);

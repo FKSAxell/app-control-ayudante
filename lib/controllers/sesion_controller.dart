@@ -9,6 +9,7 @@ import 'auth_controller.dart';
 
 class SesionController extends GetxController
     with SingleGetTickerProviderMixin {
+  RxBool loading = true.obs;
   List<Sesiones> sesiones = <Sesiones>[
     Sesiones(id: 1, sesion: []),
     Sesiones(id: 2, sesion: []),
@@ -22,12 +23,12 @@ class SesionController extends GetxController
   TabController? tabCtrl;
   @override
   void onInit() async {
-    await obtenerClasesPorSesionesFavoritas();
     tabCtrl = TabController(
       length: sesiones.length,
       vsync: this,
       initialIndex: 0,
     );
+    await obtenerClasesPorSesionesFavoritas();
     super.onInit();
   }
 
@@ -38,6 +39,7 @@ class SesionController extends GetxController
   }
 
   Future<bool> obtenerClasesPorSesionesFavoritas() async {
+    this.loading.value = false;
     final token = await AuthController.getToken();
     final userCtrl = Get.find<UserController>();
     final resp = await http.get(
@@ -55,6 +57,8 @@ class SesionController extends GetxController
           sesiones[item.id - 1].sesion = [...item.sesion];
         }
       }
+
+      this.loading.value = true;
 
       return true;
     } else {

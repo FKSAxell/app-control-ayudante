@@ -57,7 +57,10 @@ class MateriaSearchDelegate extends SearchDelegate<String> {
     return ListView.builder(
       itemCount: suggestions.length,
       itemBuilder: (content, index) => ListTile(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed("materia",
+                arguments: [suggestions[index].id, suggestions[index].nombre]);
+          },
           leading: Icon(Icons.arrow_left),
           title: Text(suggestions[index].nombre!)),
     );
