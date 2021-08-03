@@ -157,20 +157,31 @@ class Clase extends StatelessWidget {
       child: ListTile(
         onTap: () {},
         title: Text(
-          sesion.ayudantia!.materia!.nombre!,
+          sesion.clase!.tema!,
           style: TextStyle(
             color: Color(0xff47525E),
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: Text(
-          sesion.ayudantia!.usuario!.nombre!,
-          style: TextStyle(
-            color: Color(0xff72777B),
-          ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              sesion.ayudantia!.materia!.nombre!,
+              style: TextStyle(
+                color: Color(0xff72777B),
+              ),
+            ),
+            Text(
+              sesion.ayudantia!.usuario!.nombre!,
+              style: TextStyle(
+                color: Color(0xff72777B),
+              ),
+            ),
+          ],
         ),
         trailing: Text(
-          "${sesion.horaInicio}:${sesion.minutoInicio}",
+          "${sesion.horaInicio}:${(sesion.minutoInicio.toString().length == 1) ? "0" + sesion.minutoInicio.toString() : sesion.minutoInicio}",
           style: TextStyle(
             color: Color(0xff47525E),
             fontSize: 15,
