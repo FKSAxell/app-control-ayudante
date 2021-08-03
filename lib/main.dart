@@ -25,13 +25,13 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    PushNotificationController.messagesStream.listen((message) {
-      Get.snackbar(
-        'Notificación',
-        '$message',
-        backgroundColor: Colors.white,
-      );
-    });
+    // PushNotificationController.messagesStream.listen((message) {
+    //   Get.snackbar(
+    //     'Notificación',
+    //     '$message',
+    //     backgroundColor: Colors.white,
+    //   );
+    // });
   }
 
   @override

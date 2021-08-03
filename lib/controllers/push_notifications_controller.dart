@@ -2,30 +2,64 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class PushNotificationController {
   static FirebaseMessaging messaging = FirebaseMessaging.instance;
   static String? token;
-  static StreamController<String> _messageStream =
-      new StreamController.broadcast();
-  static Stream<String> get messagesStream => _messageStream.stream;
+  // static StreamController<String> _messageStream =
+  //     new StreamController.broadcast();
+  // static Stream<String> get messagesStream => _messageStream.stream;
+
+  static const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    'This channel is used for important notifications.', // description
+    importance: Importance.max,
+  );
+
+  static final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   static Future _backgroundHandler(RemoteMessage message) async {
     // print( 'onBackground Handler ${ message.messageId }');
-    print(message.data);
-    _messageStream.add(message.data['type'] ?? 'No data');
+    print('_backgroundHandler: ${message.data}');
+    // _messageStream.add(message.data['type'] ?? 'No data');
   }
 
   static Future _onMessageHandler(RemoteMessage message) async {
     // print( 'onMessage Handler ${ message.messageId }');
-    print(message.data);
-    _messageStream.add(message.data['type'] ?? 'No data');
+    print('_onMessageHandler: ${message.data}');
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+
+    RemoteNotification? notification = message.notification;
+    String iconName = AndroidInitializationSettings('@mipmap/ic_launcher')
+        .defaultIcon
+        .toString();
+
+    // Si `onMessage` es activado con una notificación, construimos nuestra propia
+    // notificación local para mostrar a los usuarios, usando el canal creado.
+    if (notification != null) {
+      flutterLocalNotificationsPlugin.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+                channel.id, channel.name, channel.description,
+                icon: iconName),
+          ));
+    }
+    // _messageStream.add(message.data['type'] ?? 'No data');
   }
 
   static Future _onMessageOpenApp(RemoteMessage message) async {
     // print( 'onMessageOpenApp Handler ${ message.messageId }');
-    print(message.data);
-    _messageStream.add(message.data['type'] ?? 'No data');
+    print('onMessageOpenApp: ${message.data}');
+    // _messageStream.add(message.data['type'] ?? 'No data');
   }
 
   static Future initializeApp() async {
@@ -61,6 +95,6 @@ class PushNotificationController {
   // }
 
   static closeStreams() {
-    _messageStream.close();
+    // _messageStream.close();
   }
 }
