@@ -1,4 +1,5 @@
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
+import 'package:app_control_ayudante/controllers/sesion_registrada_controller.dart';
 import 'package:app_control_ayudante/helpers/sliver_persisten_header.dart';
 import 'package:app_control_ayudante/models/ayudantia_model.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class _MateriaPageState extends State<MateriaPage> {
   Widget build(BuildContext context) {
     final matFacCtrl = Get.find<MateriasFacultadController>();
     final List<String?> argumentos = Get.arguments;
-
+    final sesRegCtrl = Get.put(SesionRegistradaController());
     return Scaffold(
       backgroundColor: Color(0xffE5E9F2),
       body: CustomScrollView(
@@ -32,8 +33,8 @@ class _MateriaPageState extends State<MateriaPage> {
               Obx(() => (matFacCtrl.loading.value)
                   ? IconButton(
                       onPressed: () async => {
-                            await matFacCtrl.obtenerSetEstadoMateriaRegistarada(
-                                argumentos[0]!)
+                            await matFacCtrl
+                                .setEstadoMateriaRegistarada(argumentos[0]!)
                           },
                       icon: Icon((matFacCtrl.favorito.value)
                           ? Icons.star
@@ -109,6 +110,8 @@ class _MateriaPageState extends State<MateriaPage> {
                             Ayudantia ayudante = matFacCtrl.ayudantes[index];
                             return ListTile(
                               onTap: () {
+                                sesRegCtrl.obtenerEstadoSesiones(ayudante);
+
                                 Get.toNamed("ayudante", arguments: ayudante);
                               },
                               title: Text(

@@ -113,7 +113,7 @@ class MateriasFacultadController extends GetxController
     }
   }
 
-  Future<bool> obtenerSetEstadoMateriaRegistarada(String idMateria) async {
+  Future<bool> setEstadoMateriaRegistarada(String idMateria) async {
     final token = await AuthController.getToken();
     final resp = await http.get(
       Uri.parse('${Enviroment.apiUrl}/materia/registro/set/$idMateria'),

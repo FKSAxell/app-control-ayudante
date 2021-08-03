@@ -26,7 +26,7 @@ class SesionController extends GetxController
     tabCtrl = TabController(
       length: sesiones.length,
       vsync: this,
-      initialIndex: 0,
+      initialIndex: DateTime.now().weekday - 1,
     );
     await obtenerClasesPorSesionesFavoritas();
     super.onInit();
@@ -53,6 +53,15 @@ class SesionController extends GetxController
       final clasesSesionesResponse =
           clasesPorSesionesResponseFromJson(resp.body);
       if (clasesSesionesResponse.ok) {
+        sesiones = [
+          Sesiones(id: 1, sesion: []),
+          Sesiones(id: 2, sesion: []),
+          Sesiones(id: 3, sesion: []),
+          Sesiones(id: 4, sesion: []),
+          Sesiones(id: 5, sesion: []),
+          Sesiones(id: 6, sesion: []),
+          Sesiones(id: 7, sesion: []),
+        ];
         for (Sesiones item in clasesSesionesResponse.sesiones!) {
           sesiones[item.id - 1].sesion = [...item.sesion];
         }

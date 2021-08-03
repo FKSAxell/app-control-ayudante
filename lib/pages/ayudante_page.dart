@@ -1,3 +1,4 @@
+import 'package:app_control_ayudante/controllers/sesion_registrada_controller.dart';
 import 'package:app_control_ayudante/helpers/dia.dart';
 import 'package:app_control_ayudante/models/ayudantia_model.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,7 @@ class AyudantePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Ayudantia ayudante = Get.arguments;
     final size = MediaQuery.of(context).size;
-    print(ayudante.usuario!.nombre);
-    print(ayudante.sesion);
+    final sesRegCtrl = Get.find<SesionRegistradaController>();
     return Scaffold(
       backgroundColor: Color(0xffE5E9F2),
       appBar: AppBar(
@@ -31,45 +31,61 @@ class AyudantePage extends StatelessWidget {
                   height: size.height * 0.35,
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    itemCount: ayudante.sesion!.length,
-                    itemBuilder: (context, index) {
-                      final sesion = ayudante.sesion![index];
-                      if (sesion.dia != null) {
-                        return Material(
-                          color: Colors.transparent,
-                          child: ListTile(
-                            onTap: () {},
-                            title: Text(
-                              "${dias[sesion.dia]!} ",
-                              style: TextStyle(
-                                color: Color(0xff47525E),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            subtitle: Text(
-                              "Sesión ${index + 1}: ${sesion.horaInicio}:${sesion.minutoInicio} - ${sesion.horaFin}:${sesion.minutoFin}",
-                              style: TextStyle(
-                                color: Color(0xff47525E),
-                              ),
-                            ),
-                            trailing: Icon(
-                              Icons.star,
-                              // color: Colors.amber[600],
-                              size: 30,
-                            ),
+                  child: Obx(
+                    () => sesRegCtrl.loading.value
+                        ? ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                            itemCount: ayudante.sesion!.length,
+                            itemBuilder: (context, index) {
+                              final sesion = ayudante.sesion![index];
+
+                              if (sesion.dia != null) {
+                                return Material(
+                                  color: Colors.transparent,
+                                  child: Obx(() {
+                                    final favorito = sesRegCtrl.sesiones[index];
+                                    return ListTile(
+                                      onTap: () {
+                                        sesRegCtrl.setEstadoSesionRegistrada(
+                                            sesion.id!, index);
+                                      },
+                                      title: Text(
+                                        "${dias[sesion.dia]!} ",
+                                        style: TextStyle(
+                                          color: Color(0xff47525E),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        "Sesión ${index + 1}: ${sesion.horaInicio}:${sesion.minutoInicio} - ${sesion.horaFin}:${sesion.minutoFin}",
+                                        style: TextStyle(
+                                          color: Color(0xff47525E),
+                                        ),
+                                      ),
+                                      trailing: Icon(
+                                        (favorito)
+                                            ? Icons.star
+                                            : Icons.star_border,
+                                        color: Colors.amber[600],
+                                        size: 30,
+                                      ),
+                                    );
+                                  }),
+                                );
+                              } else {
+                                return Center(
+                                  child: Container(
+                                    padding: EdgeInsets.only(top: 100),
+                                    child: Text("No hay sesiones disponibles"),
+                                  ),
+                                );
+                              }
+                            },
+                          )
+                        : Container(
+                            alignment: Alignment.topCenter,
+                            child: LinearProgressIndicator(),
                           ),
-                        );
-                      } else {
-                        return Center(
-                          child: Container(
-                            padding: EdgeInsets.only(top: 100),
-                            child: Text("No hay sesiones disponibles"),
-                          ),
-                        );
-                      }
-                    },
                   ),
                 )
               ],

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:app_control_ayudante/models/asistencia_model.dart';
 import 'package:app_control_ayudante/models/sesion_model.dart';
+import 'package:app_control_ayudante/models/ubicacion_model.dart';
 
 Clase materiaFromJson(String str) => Clase.fromJson(json.decode(str));
 String materiaToJson(Clase data) => json.encode(data.toJson());
@@ -29,7 +30,7 @@ class Clase {
   String? tema;
   String? descripcion;
   String? enlace;
-  String? ubicacion; //TODO: CLASS UBICACION
+  Ubicacion? ubicacion; //TODO: CLASS UBICACION
   DateTime? fechaCreacion;
   DateTime? fechaActualizacion;
   int? v;
@@ -48,7 +49,16 @@ class Clase {
         tema: json["tema"],
         descripcion: json["descripcion"],
         enlace: json["enlace"],
-        ubicacion: json["ubicacion"],
+        ubicacion: json['ubicacion'] != null
+            ? new Ubicacion.fromJson(json['ubicacion'].runtimeType == String
+                ? {"id": json['ubicacion']}
+                : json['ubicacion'])
+            : null,
+        asistencia: json['asistencia'] != null
+            ? new Asistencia.fromJson(json['asistencia'].runtimeType == String
+                ? {"id": json['asistencia']}
+                : json['asistencia'])
+            : null,
         fechaCreacion: json["fechaCreacion"] != null
             ? DateTime.parse(json["fechaCreacion"])
             : null,

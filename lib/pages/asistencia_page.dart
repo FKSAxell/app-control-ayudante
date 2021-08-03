@@ -73,7 +73,7 @@ class ClaseTile extends StatelessWidget {
         trailing: Column(
           children: [
             Icon(
-              Icons.star,
+              (clase.asistencia != null) ? Icons.star : Icons.star_border,
               color: Colors.amber[600],
               size: 30,
             ),
