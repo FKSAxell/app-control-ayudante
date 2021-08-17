@@ -41,6 +41,9 @@ class _MyAppState extends State<MyApp> {
       title: 'Material App',
       initialRoute: 'loading',
       getPages: appRoutes,
+      //   theme: ThemeData(
+      //     color
+      // ),
     );
   }
 }

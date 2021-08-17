@@ -8,14 +8,15 @@ class AsistenciaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final claFavCtrl = Get.find<ClaseFavoritoController>();
     return Container(
-      color: Color(0xffE5E9F2),
+      color: Color(0xfff2f2f2),
       child: Obx(
         () => (claFavCtrl.clases.length != 0)
-            ? ListView.separated(
-                separatorBuilder: (context, index) => Divider(
-                  height: 1,
-                  color: Color(0xff243165),
-                ),
+            ? ListView.builder(
+                // separatorBuilder: (context, index) => Divider(
+                //   thickness: 1.2,
+                //   height: 1,
+                //   color: Color(0xff5b378d),
+                // ),
                 itemCount: claFavCtrl.clases.length,
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
@@ -42,14 +43,29 @@ class ClaseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      color: Colors.white,
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 2),
+      // height: 60,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        // borderRadius: BorderRadius.circular(5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            offset: Offset(1, 1),
+          ),
+        ],
+        border: Border(
+          bottom: BorderSide(
+              width: 1.5, color: Color(0xff5b378d)), //TODO: COLOR DE FACULTAD
+        ),
+      ),
       child: ListTile(
         onTap: () {},
         title: Text(
           clase.tema!,
           style: TextStyle(
-            color: Color(0xff47525E),
+            color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -59,13 +75,13 @@ class ClaseTile extends StatelessWidget {
             Text(
               clase.sesion!.ayudantia!.materia!.nombre!,
               style: TextStyle(
-                color: Color(0xff47525E),
+                color: Colors.black87,
               ),
             ),
             Text(
               clase.sesion!.ayudantia!.usuario!.nombre!,
               style: TextStyle(
-                color: Color(0xff72777B),
+                color: Colors.black54,
               ),
             ),
           ],
@@ -83,7 +99,7 @@ class ClaseTile extends StatelessWidget {
                   .substring(0, 10)
                   .replaceAll("-", "/"), //TODO: formato fecha
               style: TextStyle(
-                color: Color(0xff47525E),
+                color: Colors.black87,
                 fontSize: 12,
               ),
             )
@@ -91,10 +107,13 @@ class ClaseTile extends StatelessWidget {
         ),
         leading: CircleAvatar(
           radius: 25,
-          backgroundColor: Colors.blue,
+          backgroundColor: Color(0xffeaeaea),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(25),
-            child: Icon(Icons.person),
+            child: Icon(
+              Icons.person,
+              color: Color(0xff707070),
+            ),
           ),
         ),
       ),

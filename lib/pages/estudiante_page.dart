@@ -20,7 +20,7 @@ class EstudiantePage extends StatelessWidget {
           Column(
             children: [
               Container(
-                color: Color(0xff243165),
+                color: Color(0xff141414), //TODO: COLOR FACULTAD
                 height: size.height * 0.35,
               ),
               Expanded(
@@ -72,10 +72,14 @@ class EstudiantePage extends StatelessWidget {
                   alignment: Alignment.center,
                   child: CircleAvatar(
                     radius: 55,
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Color(0xffeaeaea),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(55),
-                      child: Icon(Icons.person),
+                      borderRadius: BorderRadius.circular(25),
+                      child: Icon(
+                        Icons.person,
+                        size: 50,
+                        color: Color(0xff707070),
+                      ),
                     ),
                   ),
                 ),
@@ -185,7 +189,7 @@ class BoxMateria extends StatelessWidget {
   final Function onTap;
   const BoxMateria({
     Key? key,
-    this.color: Colors.blue,
+    this.color: Colors.deepPurple,
     required this.text,
     required this.onTap,
   }) : super(key: key);

@@ -4,8 +4,10 @@ import 'package:app_control_ayudante/models/materia_model.dart';
 import 'package:animate_do/animate_do.dart';
 
 import 'package:app_control_ayudante/search/search_delegate.dart';
+import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AyudantiaPage extends StatefulWidget {
   const AyudantiaPage({Key? key}) : super(key: key);
@@ -22,13 +24,13 @@ class _AyudantiaPageState extends State<AyudantiaPage>
     final size = MediaQuery.of(context).size;
 
     return Container(
-      color: Color(0xff243165),
+      color: Colors.white,
       child: Stack(
         children: [
           Container(
-            height: size.height * 0.3,
+            height: size.height * 0.28,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
                   height: 5,
@@ -38,36 +40,43 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Materias",
-                    style: TextStyle(color: Colors.white, fontSize: 40),
+                    style: GoogleFonts.lato(
+                        textStyle:
+                            TextStyle(color: Colors.black, fontSize: 33)),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => showSearch(
-                      context: context, delegate: MateriaSearchDelegate()),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 15),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.search,
-                          color: Color(0xff8190A5),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Buscar Materia...",
-                          style:
-                              TextStyle(fontSize: 16, color: Color(0xff8190A5)),
-                        ),
-                      ],
-                    ),
-                    width: size.width * 0.8,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(45),
-                      color: Colors.white,
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: GestureDetector(
+                    onTap: () => showSearch(
+                        context: context, delegate: MateriaSearchDelegate()),
+                    child: Container(
+                      padding: EdgeInsets.only(left: 15),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.search,
+                            color: Color(0xff8190A5),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Buscar Materia...",
+                            style: TextStyle(
+                                fontSize: 16, color: Color(0xff8190A5)),
+                          ),
+                        ],
+                      ),
+                      width: size.width * 0.8,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(45),
+                        color: Colors.white,
+                        border: Border.all(color: Color(0xff666666)),
+                      ),
                     ),
                   ),
                 ),
@@ -103,13 +112,13 @@ class _AyudantiaPageState extends State<AyudantiaPage>
           ),
           SizedBox.expand(
             child: DraggableScrollableSheet(
-              initialChildSize: 0.61,
-              minChildSize: 0.61,
+              initialChildSize: 0.63,
+              minChildSize: 0.63,
               expand: false,
               builder: (_, controller) {
                 return Container(
                   decoration: BoxDecoration(
-                    color: Color(0xffE5E9F2),
+                    color: Color(0xfff2f2f2),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
@@ -122,8 +131,8 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                       ),
                       Container(
                         width: size.width * 0.2,
-                        height: 3,
-                        color: Color(0xff243165),
+                        height: 1,
+                        color: Color(0xff000000),
                       ),
                       SizedBox(
                         height: 15,
@@ -135,30 +144,36 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                         ),
                         child: Obx(
                           () => (matFacCtrl.loadingMatFac.value)
-                              ? TabBar(
-                                  isScrollable: true,
-                                  physics: BouncingScrollPhysics(),
-                                  controller: matFacCtrl.tabCtrl,
-                                  labelColor: Colors.white,
-                                  labelStyle: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  unselectedLabelColor: Color(0xff47525E),
-                                  indicator: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(25.0),
-                                    color: Color(0xff243165),
-                                  ),
-                                  onTap: (value) {},
-                                  tabs: matFacCtrl.materiasFacultad
-                                      .map(
-                                        (facultad) => Tab(
-                                          child: Text(
-                                            facultad.codigo!,
+                              ? Container(
+                                  height: 40,
+                                  child: TabBar(
+                                    isScrollable: true,
+                                    physics: BouncingScrollPhysics(),
+                                    controller: matFacCtrl.tabCtrl,
+                                    labelColor: Colors.white,
+                                    labelStyle: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    unselectedLabelColor: Color(0xff47525E),
+                                    indicator: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      color: Color(0xff5b378d),
+                                    ),
+                                    indicatorWeight: 0,
+                                    onTap: (value) {},
+                                    tabs: matFacCtrl.materiasFacultad
+                                        .map(
+                                          (facultad) => Container(
+                                            child: Tab(
+                                              child: Text(
+                                                facultad.codigo!,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      )
-                                      .toList(),
+                                        )
+                                        .toList(),
+                                  ),
                                 )
                               : CircularProgressIndicator(),
                         ),
@@ -257,7 +272,7 @@ class AyudanteEnClase extends StatelessWidget {
               Pulse(
                 child: CircleAvatar(
                   radius: 15,
-                  backgroundColor: Colors.redAccent.withOpacity(0.6),
+                  backgroundColor: Color(0xffe84da6).withOpacity(0.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(25),
                     child: Container(),
@@ -270,16 +285,19 @@ class AyudanteEnClase extends StatelessWidget {
                 width: 45,
                 child: CircleAvatar(
                   radius: 20,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Color(0xffeaeaea),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(25),
-                    child: Icon(Icons.person),
+                    child: Icon(
+                      Icons.person,
+                      color: Color(0xff707070),
+                    ),
                   ),
                 ),
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: new Border.all(
-                    color: Colors.redAccent.withOpacity(0.4),
+                  border: Border.all(
+                    color: Color(0xffe84da6).withOpacity(0.0),
                     width: 2.0,
                   ),
                 ),
@@ -291,7 +309,7 @@ class AyudanteEnClase extends StatelessWidget {
           ),
           Text(
             "Axell C.",
-            style: TextStyle(color: Colors.white, fontSize: 12),
+            style: TextStyle(color: Colors.black, fontSize: 12),
           )
         ],
       ),

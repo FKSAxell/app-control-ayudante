@@ -33,6 +33,7 @@ dependencies:
   quiver: ^3.0.1
   flutter_local_notifications: ^8.0.0
   animate_do: ^2.0.0
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:

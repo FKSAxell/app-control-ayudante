@@ -57,6 +57,7 @@ class MateriasFacultadController extends GetxController
           materiasPorFacultadResponseFromJson(resp.body);
       if (registrosMateriaResponse.ok) {
         materiasFacultad.addAll(registrosMateriaResponse.facultades);
+
         List<Materia> materiasTodas = [];
         for (Facultad facultad in registrosMateriaResponse.facultades) {
           List<Materia>? materiasTMP = facultad.materia;

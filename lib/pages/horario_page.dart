@@ -28,7 +28,8 @@ class _HorarioPageState extends State<HorarioPage>
               Text(
                 meses[today.month]!,
                 style: TextStyle(
-                  color: Color(0xff47525E),
+                  // color: Color(0xff47525E),
+                  color: Colors.black87,
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
@@ -50,12 +51,13 @@ class _HorarioPageState extends State<HorarioPage>
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
-                          unselectedLabelColor: Color(0xff47525E),
+                          // unselectedLabelColor: Color(0xff47525E),
+                          unselectedLabelColor: Colors.black54,
                           indicator: BoxDecoration(
                             borderRadius: BorderRadius.circular(
                               25.0,
                             ),
-                            color: Color(0xff243165),
+                            color: Colors.black,
                           ),
                           tabs: <Widget>[
                             Tab(
@@ -120,7 +122,7 @@ class Dia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xffE5E9F2),
+      color: Color(0xfff2f2f2),
       child: ListView.builder(
         itemCount: sesiones.length,
         physics: BouncingScrollPhysics(),
@@ -143,23 +145,29 @@ class Clase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 2),
+      // height: 60,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
+        // borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
             offset: Offset(1, 1),
           ),
         ],
+        border: Border(
+          bottom: BorderSide(
+              width: 1.5, color: Color(0xff5b378d)), //TODO: COLOR DE FACULTAD
+        ),
       ),
       child: ListTile(
         onTap: () {},
         title: Text(
           sesion.clase!.tema!,
           style: TextStyle(
-            color: Color(0xff47525E),
+            color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -169,13 +177,13 @@ class Clase extends StatelessWidget {
             Text(
               sesion.ayudantia!.materia!.nombre!,
               style: TextStyle(
-                color: Color(0xff72777B),
+                color: Colors.black87,
               ),
             ),
             Text(
               sesion.ayudantia!.usuario!.nombre!,
               style: TextStyle(
-                color: Color(0xff72777B),
+                color: Colors.black54,
               ),
             ),
           ],
@@ -190,10 +198,13 @@ class Clase extends StatelessWidget {
         ),
         leading: CircleAvatar(
           radius: 25,
-          backgroundColor: Colors.blue,
+          backgroundColor: Color(0xffeaeaea),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(25),
-            child: Icon(Icons.person),
+            child: Icon(
+              Icons.person,
+              color: Color(0xff707070),
+            ),
           ),
         ),
       ),
