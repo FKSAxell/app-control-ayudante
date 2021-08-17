@@ -1,4 +1,4 @@
-import 'package:app_control_ayudante/controllers/registros_controller.dart';
+import 'package:app_control_ayudante/controllers/materias_controller.dart';
 import 'package:app_control_ayudante/controllers/sesion_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
 import 'package:app_control_ayudante/models/ayudantia_model.dart';
@@ -62,6 +62,8 @@ class SesionRegistradaController extends GetxController {
       sesiones[index] = favoritoResponse.result;
       final sesCtrl = Get.find<SesionController>();
       await sesCtrl.obtenerClasesPorSesionesFavoritas();
+      final matCtrl = Get.find<MateriaController>();
+      matCtrl.obtenerMateriasPorFavoritoDeUsuario();
       return favoritoResponse.result;
     } else {
       return false;

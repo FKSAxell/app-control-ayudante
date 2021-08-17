@@ -1,5 +1,5 @@
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
-import 'package:app_control_ayudante/controllers/registros_controller.dart';
+import 'package:app_control_ayudante/controllers/materias_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:get/get.dart';
@@ -10,7 +10,7 @@ class EstudiantePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userCtrl = Get.find<UserController>();
-    final regCtrl = Get.find<RegistrosController>();
+    final matCtrl = Get.find<MateriaController>();
     final matFacCtrl = Get.find<MateriasFacultadController>();
     final size = MediaQuery.of(context).size;
     return Container(
@@ -24,29 +24,29 @@ class EstudiantePage extends StatelessWidget {
                 height: size.height * 0.35,
               ),
               Expanded(
-                child: (regCtrl.registros.length != 0)
+                child: (matCtrl.materias.length != 0)
                     ? Obx(
                         () => ListView.builder(
                           physics: BouncingScrollPhysics(),
-                          itemCount: regCtrl.registros.length,
+                          itemCount: matCtrl.materias.length,
                           itemBuilder: (context, index) {
                             List<BoxMateria> boxs = [
-                              ...regCtrl.registros[index].map((e) => BoxMateria(
+                              ...matCtrl.materias[index].map((e) => BoxMateria(
                                     onTap: () {
                                       matFacCtrl.ayudantes.value = [];
                                       matFacCtrl.favorito.value = false;
-                                      matFacCtrl.obtenerAyudantesPorMateria(
-                                          e.materia!.id!);
+                                      matFacCtrl
+                                          .obtenerAyudantesPorMateria(e.id!);
                                       matFacCtrl
                                           .obtenerEstadoMateriaRegistarada(
-                                              e.materia!.id!);
+                                              e.id!);
 
                                       Get.toNamed("materia", arguments: [
-                                        e.materia!.id,
-                                        e.materia!.nombre
+                                        e.id,
+                                        e.nombre
                                       ]); //TODO: Problema de tener varias class Materia2
                                     },
-                                    text: e.materia!.nombre!,
+                                    text: e.nombre!,
                                   ))
                             ];
                             return MateriaRow(

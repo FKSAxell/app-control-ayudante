@@ -1,19 +1,19 @@
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
-import 'package:app_control_ayudante/models/registro_model.dart';
-import 'package:app_control_ayudante/response/registros_materia_response.dart';
+import 'package:app_control_ayudante/models/materia_model.dart';
+import 'package:app_control_ayudante/response/materias_favorito_usuario_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:quiver/iterables.dart';
 
 import 'auth_controller.dart';
 
-class RegistrosController extends GetxController {
-  RxList<List<Registro>> registros = <List<Registro>>[].obs;
-  List<Registro> registrosTMP = <Registro>[].obs;
+class MateriaController extends GetxController {
+  RxList<List<Materia>> materias = <List<Materia>>[].obs;
+
   @override
   void onInit() async {
-    await obtenerMateriasPorRegistroDeUsuario();
+    await obtenerMateriasPorFavoritoDeUsuario();
     super.onInit();
   }
 
@@ -23,7 +23,7 @@ class RegistrosController extends GetxController {
     super.onClose();
   }
 
-  Future<bool> obtenerMateriasPorRegistroDeUsuario() async {
+  Future<bool> obtenerMateriasPorFavoritoDeUsuario() async {
     final token = await AuthController.getToken();
     final userCtrl = Get.find<UserController>();
     final resp = await http.get(
@@ -34,12 +34,11 @@ class RegistrosController extends GetxController {
       },
     );
     if (resp.statusCode == 200) {
-      final registrosMateriaResponse =
-          registrosMateriaResponseFromJson(resp.body);
-      if (registrosMateriaResponse.ok) {
-        registrosTMP = registrosMateriaResponse.registros!;
-        registros.value = [
-          ...partition(registrosMateriaResponse.registros!, 2)
+      final materiasFavoritoUsuarioResponse =
+          materiasFavoritoUsuarioResponseFromJson(resp.body);
+      if (materiasFavoritoUsuarioResponse.ok!) {
+        materias.value = [
+          ...partition(materiasFavoritoUsuarioResponse.materias!, 2)
         ];
       }
 

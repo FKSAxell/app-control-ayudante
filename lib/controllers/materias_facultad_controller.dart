@@ -1,4 +1,4 @@
-import 'package:app_control_ayudante/controllers/registros_controller.dart';
+import 'package:app_control_ayudante/controllers/materias_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
 import 'package:app_control_ayudante/models/ayudantia_model.dart';
 
@@ -125,8 +125,7 @@ class MateriasFacultadController extends GetxController
     if (resp.statusCode == 200) {
       final favoritoResponse = resultResponseFromJson(resp.body);
       favorito.value = favoritoResponse.result;
-      final regCtrl = Get.find<RegistrosController>();
-      regCtrl.obtenerMateriasPorRegistroDeUsuario();
+
       return true;
     } else {
       return false;

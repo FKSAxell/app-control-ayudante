@@ -26,7 +26,7 @@ class _HorarioPageState extends State<HorarioPage>
           child: Column(
             children: [
               Text(
-                "Julio",
+                meses[today.month]!,
                 style: TextStyle(
                   color: Color(0xff47525E),
                   fontSize: 25,

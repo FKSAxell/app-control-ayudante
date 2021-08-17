@@ -1,6 +1,7 @@
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/helpers/MyBehavior.dart';
 import 'package:app_control_ayudante/models/materia_model.dart';
+import 'package:animate_do/animate_do.dart';
 
 import 'package:app_control_ayudante/search/search_delegate.dart';
 import 'package:get/get.dart';
@@ -71,27 +72,30 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                   ),
                 ),
                 Container(
+                  // color: Colors.amber,
                   height: 75,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    children: [
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                      AyudanteEnClase(),
-                    ],
+                  alignment: Alignment.center,
+                  child: Center(
+                    child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      physics: BouncingScrollPhysics(),
+                      padding: const EdgeInsets.all(5.0),
+                      children: [
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                        Center(child: AyudanteEnClase()),
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -247,20 +251,47 @@ class AyudanteEnClase extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         children: [
-          CircleAvatar(
-            radius: 25,
-            backgroundColor: Colors.blue,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: Icon(Icons.person),
-            ),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Pulse(
+                child: CircleAvatar(
+                  radius: 15,
+                  backgroundColor: Colors.redAccent.withOpacity(0.6),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: Container(),
+                  ),
+                ),
+                infinite: true,
+                duration: Duration(milliseconds: 2000),
+              ),
+              Container(
+                width: 45,
+                child: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.blue,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: Icon(Icons.person),
+                  ),
+                ),
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: new Border.all(
+                    color: Colors.redAccent.withOpacity(0.4),
+                    width: 2.0,
+                  ),
+                ),
+              ),
+            ],
           ),
           SizedBox(
             height: 5,
           ),
           Text(
             "Axell C.",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white, fontSize: 12),
           )
         ],
       ),

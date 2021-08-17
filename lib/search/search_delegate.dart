@@ -58,6 +58,10 @@ class MateriaSearchDelegate extends SearchDelegate<String> {
       itemCount: suggestions.length,
       itemBuilder: (content, index) => ListTile(
           onTap: () {
+            matFacCtrl.ayudantes.value = [];
+            matFacCtrl.favorito.value = false;
+            matFacCtrl.obtenerAyudantesPorMateria(suggestions[index].id!);
+            matFacCtrl.obtenerEstadoMateriaRegistarada(suggestions[index].id!);
             Get.toNamed("materia",
                 arguments: [suggestions[index].id, suggestions[index].nombre]);
           },
