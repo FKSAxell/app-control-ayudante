@@ -94,7 +94,7 @@ class ClaseTile extends StatelessWidget {
               size: 30,
             ),
             Text(
-              clase.fechaClase!
+              clase.fechaClaseInicio!
                   .toIso8601String()
                   .substring(0, 10)
                   .replaceAll("-", "/"), //TODO: formato fecha

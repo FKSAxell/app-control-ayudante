@@ -19,7 +19,8 @@ class Clase {
       this.fechaCreacion,
       this.fechaActualizacion,
       this.v,
-      this.fechaClase,
+      this.fechaClaseInicio,
+      this.fechaClaseFin,
 
       //tmp
       this.asistencia});
@@ -34,7 +35,8 @@ class Clase {
   DateTime? fechaCreacion;
   DateTime? fechaActualizacion;
   int? v;
-  DateTime? fechaClase;
+  DateTime? fechaClaseInicio;
+  DateTime? fechaClaseFin;
   //TMP
   Asistencia? asistencia;
 
@@ -66,8 +68,11 @@ class Clase {
             ? DateTime.parse(json["fechaActualizacion"])
             : null,
         v: json["__v"],
-        fechaClase: json["fechaClase"] != null
-            ? DateTime.parse(json["fechaClase"])
+        fechaClaseInicio: json["fechaClaseInicio"] != null
+            ? DateTime.parse(json["fechaClaseInicio"])
+            : null,
+        fechaClaseFin: json["fechaClaseFin"] != null
+            ? DateTime.parse(json["fechaClaseFin"])
             : null,
       );
 
@@ -82,6 +87,7 @@ class Clase {
         "fechaCreacion": fechaCreacion?.toIso8601String(),
         "fechaActualizacion": fechaActualizacion?.toIso8601String(),
         "__v": v,
-        "fechaClase": fechaClase?.toIso8601String(),
+        "fechaClaseInicio": fechaClaseInicio?.toIso8601String(),
+        "fechaClaseFin": fechaClaseFin?.toIso8601String(),
       };
 }

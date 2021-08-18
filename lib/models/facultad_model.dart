@@ -12,6 +12,7 @@ class Facultad {
       this.id,
       this.nombre,
       this.codigo,
+      this.color,
       this.fechaCreacion,
       this.fechaActualizacion,
       this.v,
@@ -21,6 +22,7 @@ class Facultad {
   String? id;
   String? nombre;
   String? codigo;
+  String? color;
   DateTime? fechaCreacion;
   DateTime? fechaActualizacion;
   int? v;
@@ -32,6 +34,7 @@ class Facultad {
         id: json["_id"],
         nombre: json["nombre"],
         codigo: json["codigo"],
+        color: json["color"],
         fechaCreacion: json["fechaCreacion"] != null
             ? DateTime.parse(json["fechaCreacion"])
             : null,
@@ -56,6 +59,7 @@ class Facultad {
         "_id": id,
         "nombre": nombre,
         "codigo": codigo,
+        "color": color,
         "fechaCreacion": fechaCreacion?.toIso8601String(),
         "fechaActualizacion": fechaActualizacion?.toIso8601String(),
         "__v": v,

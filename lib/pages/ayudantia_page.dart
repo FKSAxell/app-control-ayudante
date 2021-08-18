@@ -272,7 +272,7 @@ class AyudanteEnClase extends StatelessWidget {
               Pulse(
                 child: CircleAvatar(
                   radius: 15,
-                  backgroundColor: Color(0xffe84da6).withOpacity(0.0),
+                  backgroundColor: Color(0xffe84da6).withOpacity(0.6),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(25),
                     child: Container(),
@@ -297,7 +297,7 @@ class AyudanteEnClase extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Color(0xffe84da6).withOpacity(0.0),
+                    color: Color(0xffe84da6).withOpacity(0.4),
                     width: 2.0,
                   ),
                 ),
