@@ -1,5 +1,6 @@
 import 'package:app_control_ayudante/controllers/push_notifications_controller.dart';
 import 'package:app_control_ayudante/routes/routes.dart';
+import 'package:app_control_ayudante/theme/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -41,9 +42,8 @@ class _MyAppState extends State<MyApp> {
       title: 'Material App',
       initialRoute: 'loading',
       getPages: appRoutes,
-      //   theme: ThemeData(
-      //     color
-      // ),
+      theme: Themes.light,
+      darkTheme: Themes.dark,
     );
   }
 }

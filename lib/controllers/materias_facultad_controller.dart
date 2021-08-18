@@ -1,4 +1,3 @@
-import 'package:app_control_ayudante/controllers/materias_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
 import 'package:app_control_ayudante/models/ayudantia_model.dart';
 

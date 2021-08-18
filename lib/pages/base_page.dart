@@ -28,10 +28,6 @@ class BasePage extends StatelessWidget {
     final titulos = ["Ayudantías", "Horario", "Asitencia", "Estudiante"];
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.dark,
-        elevation: 0,
-        backgroundColor: Color(0xff141414),
-        centerTitle: true,
         title: Obx(() => Text(titulos[menuCtrl.selectMenuOpt.value])),
         actions: [
           IconButton(
@@ -60,11 +56,7 @@ class BasePage extends StatelessWidget {
       ),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
-          backgroundColor: Color(0xff141414),
-          fixedColor: Colors.white,
-          unselectedItemColor: Colors.white60,
           currentIndex: menuCtrl.selectMenuOpt.value,
-          type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
               label: "Ayudantías",

@@ -56,17 +56,16 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.search,
-                            color: Color(0xff8190A5),
-                          ),
+                          Icon(Icons.search),
                           SizedBox(
                             width: 10,
                           ),
                           Text(
                             "Buscar Materia...",
                             style: TextStyle(
-                                fontSize: 16, color: Color(0xff8190A5)),
+                              fontSize: 16,
+                              //color: Color(0xff8190A5),
+                            ),
                           ),
                         ],
                       ),
@@ -74,7 +73,7 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                       height: 40,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(45),
-                        color: Colors.white,
+                        color: context.theme.backgroundColor,
                         border: Border.all(color: Color(0xff666666)),
                       ),
                     ),
