@@ -76,9 +76,11 @@ class BasePage extends StatelessWidget {
             ),
           ],
           onTap: (int i) {
-            pageCtrl.animateToPage(i,
-                duration: Duration(milliseconds: 1000),
-                curve: Curves.fastLinearToSlowEaseIn);
+            pageCtrl.animateToPage(
+              i,
+              duration: Duration(milliseconds: 1000),
+              curve: Curves.fastLinearToSlowEaseIn,
+            );
             menuCtrl.selectMenuOpt.value = i;
           },
         ),
@@ -93,6 +95,7 @@ class _MenuPrincipal extends StatelessWidget {
     final userCtrl = Get.find<UserController>();
     return Drawer(
       child: Container(
+        color: context.theme.backgroundColor,
         child: Column(
           children: [
             SafeArea(

@@ -16,6 +16,7 @@ class _MateriaPageState extends State<MateriaPage> {
   @override
   Widget build(BuildContext context) {
     final matFacCtrl = Get.find<MateriasFacultadController>();
+
     final List<String?> argumentos = Get.arguments;
     final sesRegCtrl = Get.put(SesionRegistradaController());
     return Scaffold(

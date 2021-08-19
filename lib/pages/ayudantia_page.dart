@@ -1,5 +1,6 @@
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/helpers/MyBehavior.dart';
+import 'package:app_control_ayudante/helpers/hexcolor.dart';
 import 'package:app_control_ayudante/models/materia_model.dart';
 import 'package:animate_do/animate_do.dart';
 
@@ -157,10 +158,15 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                                     unselectedLabelColor: Color(0xff47525E),
                                     indicator: BoxDecoration(
                                       borderRadius: BorderRadius.circular(25.0),
-                                      color: Color(0xff5b378d),
+                                      color: HexColor(matFacCtrl
+                                              .facultadSelect.value.color ??
+                                          "5b378d"),
                                     ),
                                     indicatorWeight: 0,
-                                    onTap: (value) {},
+                                    onTap: (value) {
+                                      matFacCtrl.facultadSelect.value =
+                                          matFacCtrl.materiasFacultad[value];
+                                    },
                                     tabs: matFacCtrl.materiasFacultad
                                         .map(
                                           (facultad) => Container(

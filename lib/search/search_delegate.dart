@@ -4,11 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MateriaSearchDelegate extends SearchDelegate<String> {
-  final suggestions1 = ["https://www.google.com"];
   final matFacCtrl = Get.find<MateriasFacultadController>();
 
   @override
   String get searchFieldLabel => "Buscar Materia...";
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return context.theme.copyWith(
+      appBarTheme: context.theme.appBarTheme.copyWith(),
+      textTheme: context.theme.textTheme.copyWith(
+        headline6: TextStyle(
+          color: Colors.white,
+          fontSize: 18.0,
+        ),
+      ),
+      inputDecorationTheme: context.theme.inputDecorationTheme.copyWith(
+        hintStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 18.0,
+        ),
+        border: InputBorder.none,
+      ),
+    );
+  }
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -57,16 +76,20 @@ class MateriaSearchDelegate extends SearchDelegate<String> {
     return ListView.builder(
       itemCount: suggestions.length,
       itemBuilder: (content, index) => ListTile(
-          onTap: () {
-            matFacCtrl.ayudantes.value = [];
-            matFacCtrl.favorito.value = false;
-            matFacCtrl.obtenerAyudantesPorMateria(suggestions[index].id!);
-            matFacCtrl.obtenerEstadoMateriaRegistarada(suggestions[index].id!);
-            Get.toNamed("materia",
-                arguments: [suggestions[index].id, suggestions[index].nombre]);
-          },
-          leading: Icon(Icons.arrow_left),
-          title: Text(suggestions[index].nombre!)),
+        onTap: () {
+          matFacCtrl.ayudantes.value = [];
+          matFacCtrl.favorito.value = false;
+          matFacCtrl.obtenerAyudantesPorMateria(suggestions[index].id!);
+          matFacCtrl.obtenerEstadoMateriaRegistarada(suggestions[index].id!);
+          Get.toNamed("materia",
+              arguments: [suggestions[index].id, suggestions[index].nombre]);
+        },
+        trailing: Icon(Icons.arrow_right),
+        title: Text(
+          suggestions[index].nombre!,
+          style: TextStyle(color: context.theme.primaryColor),
+        ),
+      ),
     );
   }
 }

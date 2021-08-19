@@ -19,6 +19,7 @@ class MateriasFacultadController extends GetxController
   RxBool loadingMatFac = true.obs;
   RxBool favorito = false.obs;
   List<Facultad> materiasFacultad = <Facultad>[].obs;
+  Rx<Facultad> facultadSelect = Facultad().obs;
   List<Materia> materias = <Materia>[].obs;
   RxList<Ayudantia> ayudantes = <Ayudantia>[].obs;
   TabController? tabCtrl;
@@ -30,6 +31,9 @@ class MateriasFacultadController extends GetxController
       vsync: this,
       initialIndex: 0,
     );
+    if (materiasFacultad.length > 0) {
+      facultadSelect.value = materiasFacultad[0];
+    }
     super.onInit();
   }
 
@@ -72,6 +76,7 @@ class MateriasFacultadController extends GetxController
     }
   }
 
+  //TODO: Mejorar Query Ayudantes
   Future<bool> obtenerAyudantesPorMateria(String idMateria) async {
     this.loading.value = false;
     final token = await AuthController.getToken();
