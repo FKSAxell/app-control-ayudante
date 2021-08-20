@@ -25,7 +25,7 @@ class _AyudantiaPageState extends State<AyudantiaPage>
     final size = MediaQuery.of(context).size;
 
     return Container(
-      color: Colors.white,
+      color: context.theme.primaryColor,
       child: Stack(
         children: [
           Container(
@@ -41,9 +41,11 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Materias",
-                    style: GoogleFonts.lato(
-                        textStyle:
-                            TextStyle(color: Colors.black, fontSize: 33)),
+                    style: TextStyle(
+                        fontSize: 33,
+                        fontFamily: "NeueHansKendrick",
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
                 Container(
@@ -81,7 +83,6 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                   ),
                 ),
                 Container(
-                  // color: Colors.amber,
                   height: 75,
                   alignment: Alignment.center,
                   child: Center(
@@ -91,18 +92,16 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                       physics: BouncingScrollPhysics(),
                       padding: const EdgeInsets.all(5.0),
                       children: [
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
-                        Center(child: AyudanteEnClase()),
+                        AyudanteEnClase(),
+                        AyudanteEnClase(),
+                        AyudanteEnClase(),
+                        AyudanteEnClase(),
+                        AyudanteEnClase(),
+                        AyudanteEnClase(),
+                        AyudanteEnClase(),
+                        AyudanteEnClase(),
+                        AyudanteEnClase(),
+                        AyudanteEnClase(),
                       ],
                     ),
                   ),
@@ -307,6 +306,27 @@ class AyudanteEnClase extends StatelessWidget {
                   ),
                 ),
               ),
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  width: 35,
+                  height: 13,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Color(0xffe84da6).withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(5)),
+                  child: Text(
+                    "CLASE",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "norwester",
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
           SizedBox(
@@ -314,7 +334,7 @@ class AyudanteEnClase extends StatelessWidget {
           ),
           Text(
             "Axell C.",
-            style: TextStyle(color: Colors.black, fontSize: 12),
+            style: TextStyle(color: Colors.white, fontSize: 12),
           )
         ],
       ),
