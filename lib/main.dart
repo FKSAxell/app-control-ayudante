@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  //TODO:DESCOMENTAR
   await PushNotificationController.initializeApp();
 
   SystemChrome.setPreferredOrientations(
@@ -40,7 +41,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: 'loading',
+      initialRoute: "loading", //'loading',
       getPages: appRoutes,
       theme: Themes.blue,
     );

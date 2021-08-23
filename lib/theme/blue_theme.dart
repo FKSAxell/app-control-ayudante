@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 final blueTheme = ThemeData.light().copyWith(
-  backgroundColor: Color(0xfff2f2f2),
+  scaffoldBackgroundColor: Color(0xfff2f2f2), //0xffE5E9F2
+  backgroundColor: Colors.white,
   primaryColor: Color(0xff243165),
+
   // canvasColor: Color(0xff243165),
   brightness: Brightness.dark,
 
@@ -28,6 +30,7 @@ final blueTheme = ThemeData.light().copyWith(
     color: Colors.black,
   ),
 
-  // textTheme: TextTheme().copyWith(),
+  // textTheme: TextTheme().copyWith(bodyText2: TextStyle(color: Colors.white)),
   buttonColor: Colors.blue,
 );
+//fondo 0xffE5E9F2

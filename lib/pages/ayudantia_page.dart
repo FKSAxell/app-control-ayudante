@@ -1,15 +1,14 @@
-import 'dart:math';
-
 import 'package:app_control_ayudante/controllers/clase_controller.dart';
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/helpers/MyBehavior.dart';
-import 'package:app_control_ayudante/helpers/colors.dart';
+
 import 'package:app_control_ayudante/helpers/hexcolor.dart';
-import 'package:app_control_ayudante/models/clase_model.dart';
+
 import 'package:app_control_ayudante/models/materia_model.dart';
 import 'package:animate_do/animate_do.dart';
 
 import 'package:app_control_ayudante/search/search_delegate.dart';
+import 'package:app_control_ayudante/widgets/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -295,105 +294,6 @@ class Materias extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class AyudanteEnClase extends StatelessWidget {
-  final Clase clase;
-  const AyudanteEnClase({
-    Key? key,
-    required this.clase,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final enClase = clase.enClase!;
-    final opacity = enClase ? 0.6 : 0.0;
-    final subOpacity = enClase ? 0.4 : 0.0;
-    Random random = new Random();
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8),
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Pulse(
-                child: CircleAvatar(
-                  radius: 15,
-                  backgroundColor: Color(0xffe84da6).withOpacity(opacity),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Container(),
-                  ),
-                ),
-                infinite: true,
-                duration: Duration(milliseconds: 2000),
-              ),
-              Container(
-                width: 45,
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: colors[random.nextInt(8)],
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(25),
-                    child: Icon(
-                      Icons.person,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Color(0xffe84da6).withOpacity(subOpacity),
-                    width: 2.0,
-                  ),
-                ),
-              ),
-              enClase
-                  ? Positioned(
-                      bottom: 0,
-                      child: Container(
-                        width: 35,
-                        height: 13,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: Color(0xffe84da6).withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Text(
-                          "CLASE",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "norwester",
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    )
-                  : Container()
-            ],
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Flexible(
-            child: Container(
-              alignment: Alignment.center,
-              width: 80,
-              child: Text(
-                this.clase.sesion!.ayudantia!.usuario!.nombre!,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: Colors.white, fontSize: 12),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          )
-        ],
       ),
     );
   }

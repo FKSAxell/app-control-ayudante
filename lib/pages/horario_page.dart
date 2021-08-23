@@ -22,6 +22,7 @@ class _HorarioPageState extends State<HorarioPage>
     return Column(
       children: [
         Container(
+          color: context.theme.backgroundColor,
           padding: EdgeInsets.symmetric(vertical: 20),
           child: Column(
             children: [

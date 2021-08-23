@@ -32,7 +32,7 @@ class BasePage extends StatelessWidget {
         title: Obx(() => Text(titulos[menuCtrl.selectMenuOpt.value])),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Get.toNamed("clase"),
             icon: Icon(Icons.notifications_none),
             splashRadius: 22,
           )
