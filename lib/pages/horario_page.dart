@@ -57,7 +57,7 @@ class _HorarioPageState extends State<HorarioPage>
                             borderRadius: BorderRadius.circular(
                               25.0,
                             ),
-                            color: Colors.black,
+                            color: context.theme.primaryColor,
                           ),
                           tabs: <Widget>[
                             Tab(

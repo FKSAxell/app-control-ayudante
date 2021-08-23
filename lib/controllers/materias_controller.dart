@@ -1,5 +1,6 @@
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:app_control_ayudante/global/environment.dart';
+import 'package:app_control_ayudante/models/clase_model.dart';
 import 'package:app_control_ayudante/models/materia_model.dart';
 import 'package:app_control_ayudante/response/materias_favorito_usuario_response.dart';
 import 'package:http/http.dart' as http;
@@ -10,10 +11,12 @@ import 'auth_controller.dart';
 
 class MateriaController extends GetxController {
   RxList<List<Materia>> materias = <List<Materia>>[].obs;
+  RxList<Clase> clases = <Clase>[].obs;
 
   @override
   void onInit() async {
     await obtenerMateriasPorFavoritoDeUsuario();
+
     super.onInit();
   }
 

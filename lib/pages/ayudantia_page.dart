@@ -1,14 +1,17 @@
+import 'dart:math';
+
+import 'package:app_control_ayudante/controllers/clase_controller.dart';
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/helpers/MyBehavior.dart';
+import 'package:app_control_ayudante/helpers/colors.dart';
 import 'package:app_control_ayudante/helpers/hexcolor.dart';
+import 'package:app_control_ayudante/models/clase_model.dart';
 import 'package:app_control_ayudante/models/materia_model.dart';
 import 'package:animate_do/animate_do.dart';
 
 import 'package:app_control_ayudante/search/search_delegate.dart';
-import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AyudantiaPage extends StatefulWidget {
   const AyudantiaPage({Key? key}) : super(key: key);
@@ -22,6 +25,7 @@ class _AyudantiaPageState extends State<AyudantiaPage>
   @override
   Widget build(BuildContext context) {
     final matFacCtrl = Get.find<MateriasFacultadController>();
+    final claCtrl = Get.find<ClaseController>();
     final size = MediaQuery.of(context).size;
 
     return Container(
@@ -84,26 +88,36 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                 ),
                 Container(
                   height: 75,
-                  alignment: Alignment.center,
-                  child: Center(
-                    child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      physics: BouncingScrollPhysics(),
-                      padding: const EdgeInsets.all(5.0),
-                      children: [
-                        AyudanteEnClase(),
-                        AyudanteEnClase(),
-                        AyudanteEnClase(),
-                        AyudanteEnClase(),
-                        AyudanteEnClase(),
-                        AyudanteEnClase(),
-                        AyudanteEnClase(),
-                        AyudanteEnClase(),
-                        AyudanteEnClase(),
-                        AyudanteEnClase(),
-                      ],
-                    ),
+                  alignment: Alignment.centerLeft,
+                  child: Obx(
+                    () => (claCtrl.clases.length != 0)
+                        ? ListView(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
+                            padding: const EdgeInsets.all(5.0),
+                            children: claCtrl.clases
+                                .map(
+                                  (clase) => FadeIn(
+                                    child: AyudanteEnClase(
+                                      clase: clase,
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          )
+                        : FadeIn(
+                            child: Container(
+                              padding: EdgeInsets.only(left: 20),
+                              child: InkWell(
+                                onTap: () => showSearch(
+                                  context: context,
+                                  delegate: MateriaSearchDelegate(),
+                                ),
+                                child: AgregarMateria(),
+                              ),
+                            ),
+                          ),
                   ),
                 )
               ],
@@ -214,6 +228,33 @@ class _AyudantiaPageState extends State<AyudantiaPage>
   }
 }
 
+class AgregarMateria extends StatelessWidget {
+  const AgregarMateria({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 45,
+      child: CircleAvatar(
+        radius: 20,
+        backgroundColor: context.theme.backgroundColor,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(25),
+          child: Icon(
+            Icons.add,
+            color: Color(0xff47525E),
+          ),
+        ),
+      ),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+}
+
 class Materias extends StatelessWidget {
   const Materias({
     Key? key,
@@ -260,12 +301,18 @@ class Materias extends StatelessWidget {
 }
 
 class AyudanteEnClase extends StatelessWidget {
+  final Clase clase;
   const AyudanteEnClase({
     Key? key,
+    required this.clase,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final enClase = clase.enClase!;
+    final opacity = enClase ? 0.6 : 0.0;
+    final subOpacity = enClase ? 0.4 : 0.0;
+    Random random = new Random();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8),
       child: Column(
@@ -276,7 +323,7 @@ class AyudanteEnClase extends StatelessWidget {
               Pulse(
                 child: CircleAvatar(
                   radius: 15,
-                  backgroundColor: Color(0xffe84da6).withOpacity(0.6),
+                  backgroundColor: Color(0xffe84da6).withOpacity(opacity),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(25),
                     child: Container(),
@@ -289,52 +336,62 @@ class AyudanteEnClase extends StatelessWidget {
                 width: 45,
                 child: CircleAvatar(
                   radius: 20,
-                  backgroundColor: Color(0xffeaeaea),
+                  backgroundColor: colors[random.nextInt(8)],
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(25),
                     child: Icon(
                       Icons.person,
-                      color: Color(0xff707070),
+                      color: Colors.white,
                     ),
                   ),
                 ),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Color(0xffe84da6).withOpacity(0.4),
+                    color: Color(0xffe84da6).withOpacity(subOpacity),
                     width: 2.0,
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  width: 35,
-                  height: 13,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Color(0xffe84da6).withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Text(
-                    "CLASE",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "norwester",
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              )
+              enClase
+                  ? Positioned(
+                      bottom: 0,
+                      child: Container(
+                        width: 35,
+                        height: 13,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Color(0xffe84da6).withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Text(
+                          "CLASE",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "norwester",
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    )
+                  : Container()
             ],
           ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            "Axell C.",
-            style: TextStyle(color: Colors.white, fontSize: 12),
+          Flexible(
+            child: Container(
+              alignment: Alignment.center,
+              width: 80,
+              child: Text(
+                this.clase.sesion!.ayudantia!.usuario!.nombre!,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: Colors.white, fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+            ),
           )
         ],
       ),

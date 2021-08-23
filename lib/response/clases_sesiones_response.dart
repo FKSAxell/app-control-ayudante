@@ -24,13 +24,15 @@ class ClasesPorSesionesResponse {
         ok: json["ok"],
         sesiones: List<Sesiones>.from(
             json["sesiones"].map((x) => Sesiones.fromJson(x))),
+        msg: json["msg"],
       );
 
   Map<String, dynamic> toJson() => {
         "ok": ok,
         "sesiones": (this.sesiones != null)
             ? List<dynamic>.from(sesiones!.map((x) => x.toJson()))
-            : []
+            : [],
+        "msg": msg
       };
 }
 

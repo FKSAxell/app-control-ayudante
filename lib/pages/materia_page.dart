@@ -51,57 +51,58 @@ class _MateriaPageState extends State<MateriaPage> {
               ),
             ),
           ),
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: SliverAppBarDelegate(
-              minHeight: 120,
-              maxHeight: 120,
-              child: Container(
-                color: Color(0xff243165),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 15),
-                      child: TopAyudante(
-                        imagen: Icon(Icons.person),
-                        nombre: "Plata 2",
-                        calificacion: "4.9",
-                        color: Color(0xffbfc1c1),
-                        radius: 25,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 5),
-                      child: TopAyudante(
-                        imagen: Icon(Icons.person),
-                        nombre: "Oro 1",
-                        calificacion: "5.0",
-                        color: Color(0xffffbf00),
-                        radius: 25,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 15),
-                      child: TopAyudante(
-                        imagen: Icon(Icons.person),
-                        nombre: "Bronce 3",
-                        calificacion: "4.8",
-                        color: Color(0xff9c5221),
-                        radius: 25,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          //TODO: TOP 3
+          // SliverPersistentHeader(
+          //   pinned: true,
+          //   delegate: SliverAppBarDelegate(
+          //     minHeight: 120,
+          //     maxHeight: 120,
+          //     child: Container(
+          //       color: Color(0xff243165),
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           Container(
+          //             margin: EdgeInsets.only(top: 15),
+          //             child: TopAyudante(
+          //               imagen: Icon(Icons.person),
+          //               nombre: "Plata 2",
+          //               calificacion: "4.9",
+          //               color: Color(0xffbfc1c1),
+          //               radius: 25,
+          //             ),
+          //           ),
+          //           SizedBox(
+          //             width: 40,
+          //           ),
+          //           Container(
+          //             margin: EdgeInsets.only(top: 5),
+          //             child: TopAyudante(
+          //               imagen: Icon(Icons.person),
+          //               nombre: "Oro 1",
+          //               calificacion: "5.0",
+          //               color: Color(0xffffbf00),
+          //               radius: 25,
+          //             ),
+          //           ),
+          //           SizedBox(
+          //             width: 40,
+          //           ),
+          //           Container(
+          //             margin: EdgeInsets.only(top: 15),
+          //             child: TopAyudante(
+          //               imagen: Icon(Icons.person),
+          //               nombre: "Bronce 3",
+          //               calificacion: "4.8",
+          //               color: Color(0xff9c5221),
+          //               radius: 25,
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Obx(
             () => (matFacCtrl.loading.value)
                 ? (matFacCtrl.ayudantes.isNotEmpty)

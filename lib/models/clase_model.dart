@@ -8,37 +8,40 @@ Clase materiaFromJson(String str) => Clase.fromJson(json.decode(str));
 String materiaToJson(Clase data) => json.encode(data.toJson());
 
 class Clase {
-  Clase(
-      {this.id,
-      this.estado,
-      this.sesion,
-      this.tema,
-      this.descripcion,
-      this.enlace,
-      this.ubicacion,
-      this.fechaCreacion,
-      this.fechaActualizacion,
-      this.v,
-      this.fechaClaseInicio,
-      this.fechaClaseFin,
+  Clase({
+    this.id,
+    this.estado,
+    this.sesion,
+    this.tema,
+    this.descripcion,
+    this.enlace,
+    this.ubicacion,
+    this.fechaCreacion,
+    this.fechaActualizacion,
+    this.v,
+    this.fechaClaseInicio,
+    this.fechaClaseFin,
 
-      //tmp
-      this.asistencia});
+    //tmp
+    this.asistencia,
+    this.enClase,
+  });
 
   String? id;
-  String? estado;
-  Sesion? sesion;
   String? tema;
+  String? estado;
   String? descripcion;
   String? enlace;
-  Ubicacion? ubicacion; //TODO: CLASS UBICACION
+  Ubicacion? ubicacion;
   DateTime? fechaCreacion;
   DateTime? fechaActualizacion;
-  int? v;
   DateTime? fechaClaseInicio;
+  Sesion? sesion;
+  int? v;
   DateTime? fechaClaseFin;
   //TMP
   Asistencia? asistencia;
+  bool? enClase;
 
   factory Clase.fromJson(Map<String, dynamic> json) => Clase(
         id: json["_id"],
@@ -56,11 +59,6 @@ class Clase {
                 ? {"id": json['ubicacion']}
                 : json['ubicacion'])
             : null,
-        asistencia: json['asistencia'] != null
-            ? new Asistencia.fromJson(json['asistencia'].runtimeType == String
-                ? {"id": json['asistencia']}
-                : json['asistencia'])
-            : null,
         fechaCreacion: json["fechaCreacion"] != null
             ? DateTime.parse(json["fechaCreacion"])
             : null,
@@ -74,6 +72,12 @@ class Clase {
         fechaClaseFin: json["fechaClaseFin"] != null
             ? DateTime.parse(json["fechaClaseFin"])
             : null,
+        asistencia: json['asistencia'] != null
+            ? new Asistencia.fromJson(json['asistencia'].runtimeType == String
+                ? {"id": json['asistencia']}
+                : json['asistencia'])
+            : null,
+        enClase: json['enClase'],
       );
 
   Map<String, dynamic> toJson() => {

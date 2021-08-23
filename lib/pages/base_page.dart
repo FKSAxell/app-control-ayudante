@@ -1,4 +1,5 @@
 import 'package:app_control_ayudante/controllers/auth_controller.dart';
+import 'package:app_control_ayudante/controllers/clase_controller.dart';
 import 'package:app_control_ayudante/controllers/clase_favorito_controller.dart';
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/controllers/menu_controller.dart';
@@ -10,7 +11,6 @@ import 'package:app_control_ayudante/pages/ayudantia_page.dart';
 import 'package:app_control_ayudante/pages/estudiante_page.dart';
 import 'package:app_control_ayudante/pages/horario_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class BasePage extends StatelessWidget {
@@ -18,6 +18,7 @@ class BasePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final menuCtrl = Get.put(MenuController());
     Get.put(MateriaController());
+    Get.put(ClaseController());
     Get.put(MateriasFacultadController());
     Get.put(SesionController());
     Get.put(ClaseFavoritoController());

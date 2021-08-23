@@ -20,7 +20,7 @@ class EstudiantePage extends StatelessWidget {
           Column(
             children: [
               Container(
-                color: Color(0xff141414), //TODO: COLOR FACULTAD
+                color: context.theme.primaryColor, //TODO: COLOR FACULTAD
                 height: size.height * 0.35,
               ),
               Expanded(

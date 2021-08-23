@@ -12,6 +12,7 @@ class AyudantePage extends StatelessWidget {
     final Ayudantia ayudante = Get.arguments;
     final size = MediaQuery.of(context).size;
     final sesRegCtrl = Get.find<SesionRegistradaController>();
+
     return Scaffold(
       backgroundColor: Color(0xffE5E9F2),
       appBar: AppBar(
