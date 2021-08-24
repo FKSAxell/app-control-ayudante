@@ -10,11 +10,17 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ClasePage extends StatelessWidget {
+class ClasePage extends StatefulWidget {
   const ClasePage({Key? key}) : super(key: key);
 
   @override
+  _ClasePageState createState() => _ClasePageState();
+}
+
+class _ClasePageState extends State<ClasePage> with TickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
+    TabController _tabController = TabController(length: 3, vsync: this);
     //TODO: Ejemplo de una clase
     final Clase clase = new Clase(
       id: "1",
@@ -57,7 +63,37 @@ class ClasePage extends StatelessWidget {
           children: [
             HeaderClase(
               clase: clase,
-            )
+            ),
+            TabBar(
+              controller: _tabController,
+              tabs: const <Widget>[
+                Tab(
+                  icon: Icon(Icons.cloud_outlined),
+                ),
+                Tab(
+                  icon: Icon(Icons.beach_access_sharp),
+                ),
+                Tab(
+                  icon: Icon(Icons.brightness_5_sharp),
+                ),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: const <Widget>[
+                  Center(
+                    child: Text("It's cloudy here"),
+                  ),
+                  Center(
+                    child: Text("It's rainy here"),
+                  ),
+                  Center(
+                    child: Text("It's sunny here"),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
