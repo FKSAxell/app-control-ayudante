@@ -52,6 +52,7 @@ class SesionController extends GetxController
     if (resp.statusCode == 200) {
       final clasesSesionesResponse =
           clasesPorSesionesResponseFromJson(resp.body);
+
       if (clasesSesionesResponse.ok) {
         sesiones = [
           Sesiones(id: 1, sesion: []),
