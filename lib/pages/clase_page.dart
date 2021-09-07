@@ -26,7 +26,7 @@ class _ClasePageState extends State<ClasePage> with TickerProviderStateMixin {
       id: "1",
       tema: "Variables y Tipos de datos",
       descripcion:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dolor vitae felis tempus consequat. Integer accumsan convallis tellus vitae ultrices. Vivamus maximus non mauris et porta. In id pharetra nibh, non mollis nunc. Nulla in interdum quam. Ut maximus ante nec turpis fermentum fringilla. Morbi laoreet ac dolor eu ornare. Vestibulum eu diam massa.\n\nPhasellus efficitur elit eu metus elementum dignissim. Phasellus nec arcu ex. Proin a placerat elit. Proin vehicula laoreet eros, sit amet congue purus hendrerit vitae. Aliquam eget nunc ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus suscipit mauris eget dolor pellentesque, id sodales eros pharetra. Vivamus vitae imperdiet nisi. Curabitur et est vel eros elementum posuere. Nullam id risus at est egestas tincidunt non luctus nisi. Vestibulum venenatis enim eget posuere ultrices. Etiam ac libero vitae nulla condimentum gravida vel et tortor.\n\nVestibulum vel gravida augue. Fusce bibendum, tortor eget interdum facilisis, ante lorem vehicula turpis, cursus feugiat arcu mi quis lorem. Phasellus rhoncus porttitor velit faucibus tristique. Nunc elementum, lorem nec convallis dapibus, purus est egestas metus, eget venenatis ligula justo at tortor. Sed consectetur, leo vitae facilisis maximus, enim nunc faucibus lacus, sed tincidunt nulla orci elementum augue. Praesent ut interdum dolor. Quisque consectetur odio vel velit tempor congue. Vivamus tincidunt justo ut dolor maximus pharetra vitae fermentum ligula. Vestibulum eu hendrerit turpis. Aliquam feugiat neque id risus molestie sagittis. Curabitur ac commodo quam. Donec at massa eget turpis cursus elementum non ac risus. In ipsum tellus, finibus quis auctor a, pulvinar sit amet nibh. Pellentesque vehicula, lorem ac aliquet vehicula, lacus arcu tempus enim, in finibus nunc lorem sit amet sapien. Nullam congue pulvinar risus, in elementum metus placerat at.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dolor vitae felis tempus consequat. Integer accumsan convallis tellus vitae ultrices. Vivamus maximus non mauris et porta. In id pharetra nibh, non mollis nunc. Nulla in interdum quam. Ut maximus ante nec turpis fermentum fringilla. Morbi laoreet ac dolor eu ornare. Vestibulum eu diam massa.",
       enlace: "https://www.youtube.com/piogram",
       enClase: true,
       ubicacion: new Ubicacion(
@@ -110,7 +110,7 @@ class Recursos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("It's rainy here"),
+      child: Text("No hay recursos"),
     );
   }
 }
@@ -209,16 +209,16 @@ class HeaderClase extends StatelessWidget {
     return Container(
       color: context.theme.primaryColor,
       width: double.infinity,
-      height: size.height * 0.3,
+      height: size.height * 0.4,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.only(left: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: size.width * 0.60,
+                  width: size.width * 0.45,
                   height: size.height * 0.15,
                   child: AutoSizeText(
                     clase.tema!,
@@ -233,23 +233,41 @@ class HeaderClase extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            width: size.width * 0.3,
-            height: size.height * 0.13,
-            child: Center(
-              child: FadeIn(
-                child: AyudanteEnClase(
-                  clase: clase,
-                  width: 90,
-                  radius: 40,
-                  pulse: 30,
-                  heightContainer: 26,
-                  widthContainer: 70,
-                  fontSize: 15,
-                  showText: false,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: size.width * 0.3,
+                height: size.height * 0.13,
+                child: Center(
+                  child: FadeIn(
+                    child: AyudanteEnClase(
+                      clase: clase,
+                      width: 90,
+                      radius: 40,
+                      pulse: 30,
+                      heightContainer: 26,
+                      widthContainer: 70,
+                      fontSize: 15,
+                      showText: false,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Container(
+                width: size.width * 0.30,
+                height: size.height * 0.10,
+                child: AutoSizeText(
+                  clase.sesion!.ayudantia!.usuario!.nombre!,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                ),
+              ),
+            ],
           ),
         ],
       ),
