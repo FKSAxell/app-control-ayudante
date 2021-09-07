@@ -1,5 +1,7 @@
 import 'package:app_control_ayudante/controllers/materias_facultad_controller.dart';
 import 'package:app_control_ayudante/controllers/materias_controller.dart';
+import 'package:app_control_ayudante/global/environment.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:app_control_ayudante/controllers/user_controller.dart';
 import 'package:get/get.dart';
@@ -70,18 +72,48 @@ class EstudiantePage extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.center,
-                  child: CircleAvatar(
-                    radius: 55,
-                    backgroundColor: Color(0xffeaeaea),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Icon(
-                        Icons.person,
-                        size: 50,
-                        color: Color(0xff707070),
-                      ),
-                    ),
-                  ),
+                  child: userCtrl.usuario.value!.foto!.isNotEmpty
+                      ? CircleAvatar(
+                          radius: 55,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(65),
+                            child: CachedNetworkImage(
+                              imageUrl: Enviroment.storage +
+                                  "usuarios/" +
+                                  userCtrl.usuario.value!.id! +
+                                  "/" +
+                                  userCtrl.usuario.value!.foto!,
+                              placeholder: (context, url) =>
+                                  new CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  CircleAvatar(
+                                radius: 55,
+                                backgroundColor: Color(0xffeaeaea),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(25),
+                                  child: Icon(
+                                    Icons.person,
+                                    size: 50,
+                                    color: Color(0xff707070),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          backgroundColor: Colors.transparent,
+                        )
+                      : CircleAvatar(
+                          radius: 55,
+                          backgroundColor: Color(0xffeaeaea),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Icon(
+                              Icons.person,
+                              size: 50,
+                              color: Color(0xff707070),
+                            ),
+                          ),
+                        ),
                 ),
                 Text(
                   userCtrl.usuario.value!.nombre!,

@@ -43,7 +43,7 @@ class SesionController extends GetxController
     final token = await AuthController.getToken();
     final userCtrl = Get.find<UserController>();
     final resp = await http.get(
-      Uri.parse('${Enviroment.apiUrl}/sesion/${userCtrl.usuario.value!.id}'),
+      Uri.parse('${Enviroment.apiUrl}/sesion'),
       headers: {
         'Content-type': 'application/json',
         'x-token': token!,
@@ -52,7 +52,6 @@ class SesionController extends GetxController
     if (resp.statusCode == 200) {
       final clasesSesionesResponse =
           clasesPorSesionesResponseFromJson(resp.body);
-
       if (clasesSesionesResponse.ok) {
         sesiones = [
           Sesiones(id: 1, sesion: []),

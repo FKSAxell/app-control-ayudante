@@ -97,9 +97,13 @@ class _AyudantiaPageState extends State<AyudantiaPage>
                             padding: const EdgeInsets.all(5.0),
                             children: claCtrl.clases
                                 .map(
-                                  (clase) => FadeIn(
-                                    child: AyudanteEnClase(
-                                      clase: clase,
+                                  (clase) => InkWell(
+                                    onTap: () => Get.toNamed("clase",
+                                        arguments: [clase, null]),
+                                    child: Container(
+                                      child: AyudanteEnClase(
+                                        clase: clase,
+                                      ),
                                     ),
                                   ),
                                 )

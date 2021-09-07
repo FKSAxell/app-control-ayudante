@@ -16,4 +16,6 @@ class Enviroment {
   static String socketUrl = Platform.isAndroid
       ? 'https://ayudantia.azurewebsites.net/'
       : 'https://ayudantia.azurewebsites.net/';
+
+  static String storage = "https://ayudantia.blob.core.windows.net/";
 }

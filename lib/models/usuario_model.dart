@@ -17,6 +17,7 @@ class Usuario {
     this.fechaActualizacion,
     this.tokenFcm,
     this.carrera,
+    this.foto,
     this.id,
   });
 
@@ -27,6 +28,7 @@ class Usuario {
   String? tokenFcm;
   Carrera? carrera;
   String? estado;
+  String? foto;
   DateTime? fechaCreacion;
   DateTime? fechaActualizacion;
 
@@ -54,6 +56,7 @@ class Usuario {
         fechaActualizacion: json["fechaActualizacion"] != null
             ? DateTime.parse(json["fechaActualizacion"])
             : null,
+        foto: json["foto"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -68,5 +71,6 @@ class Usuario {
         "tokenFCM": tokenFcm,
         "carrera": carrera?.toJson(),
         "_id": id,
+        "foto": foto
       };
 }

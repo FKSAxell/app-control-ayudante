@@ -164,7 +164,9 @@ class Clase extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        onTap: () {},
+        onTap: () {
+          Get.toNamed("clase", arguments: [sesion.clase, null]);
+        },
         title: Text(
           sesion.clase!.tema!,
           style: TextStyle(

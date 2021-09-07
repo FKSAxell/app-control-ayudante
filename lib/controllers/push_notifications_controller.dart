@@ -7,9 +7,10 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart'; /
 class PushNotificationController {
   static FirebaseMessaging messaging = FirebaseMessaging.instance;
   static String? token;
-  // static StreamController<String> _messageStream =
-  //     new StreamController.broadcast();
-  // static Stream<String> get messagesStream => _messageStream.stream;
+  static StreamController<Map<String, dynamic>> _messageStream =
+      new StreamController.broadcast();
+  static Stream<Map<String, dynamic>> get messagesStream =>
+      _messageStream.stream;
 
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
@@ -22,13 +23,13 @@ class PushNotificationController {
       FlutterLocalNotificationsPlugin(); //TODO
 
   static Future _backgroundHandler(RemoteMessage message) async {
-    // print( 'onBackground Handler ${ message.messageId }');
+    print('onBackground Handler ${message.messageId}');
     print('_backgroundHandler: ${message.data}');
-    // _messageStream.add(message.data['type'] ?? 'No data');
+    _messageStream.add(message.data);
   }
 
   static Future _onMessageHandler(RemoteMessage message) async {
-    // print( 'onMessage Handler ${ message.messageId }');
+    print('onMessage Handler ${message.messageId}');
     print('_onMessageHandler: ${message.data}');
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -44,22 +45,26 @@ class PushNotificationController {
     // notificación local para mostrar a los usuarios, usando el canal creado.
     if (notification != null) {
       flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-                channel.id, channel.name, channel.description,
-                icon: iconName),
-          )); //TODO
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel.id,
+            channel.name,
+            channel.description,
+            icon: iconName,
+          ),
+        ),
+      ); //TODO
     }
-    // _messageStream.add(message.data['type'] ?? 'No data');
+    _messageStream.add(message.data);
   }
 
   static Future _onMessageOpenApp(RemoteMessage message) async {
-    // print( 'onMessageOpenApp Handler ${ message.messageId }');
+    print('onMessageOpenApp Handler ${message.messageId}');
     print('onMessageOpenApp: ${message.data}');
-    // _messageStream.add(message.data['type'] ?? 'No data');
+    _messageStream.add(message.data);
   }
 
   static Future initializeApp() async {

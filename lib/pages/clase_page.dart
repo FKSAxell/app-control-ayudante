@@ -1,4 +1,6 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:app_control_ayudante/controllers/rate_controller.dart';
+import 'package:app_control_ayudante/helpers/mostrar_alerta.dart';
 import 'package:app_control_ayudante/models/ayudantia_model.dart';
 import 'package:app_control_ayudante/models/clase_model.dart';
 import 'package:app_control_ayudante/models/materia_model.dart';
@@ -8,6 +10,8 @@ import 'package:app_control_ayudante/models/usuario_model.dart';
 import 'package:app_control_ayudante/widgets/widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 class ClasePage extends StatefulWidget {
@@ -19,39 +23,88 @@ class ClasePage extends StatefulWidget {
 
 class _ClasePageState extends State<ClasePage> with TickerProviderStateMixin {
   @override
+  void initState() {
+    super.initState();
+    print(Get.arguments);
+    final rateCtrl = Get.put(RateController());
+    rateCtrl.rate.value = 3;
+    if (Get.arguments[1] != null) {
+      final String asistencia = Get.arguments[1];
+      SchedulerBinding.instance!.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text("¡Califica la clase!"),
+            content: Container(
+              child: RatingBar.builder(
+                initialRating: 3,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: false,
+                itemCount: 5,
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (rating) {
+                  print(rating);
+                  rateCtrl.rate.value = rating.toInt();
+                },
+              ),
+            ),
+            actions: [
+              MaterialButton(
+                child: Text('Confirmar'),
+                elevation: 5,
+                textColor: Color(0xff243165),
+                onPressed: () {
+                  print(rateCtrl.rate.value);
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          ),
+        );
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final Clase clase = Get.arguments[0];
     TabController _tabController = TabController(length: 2, vsync: this);
     //TODO: Ejemplo de una clase
-    final Clase clase = new Clase(
-      id: "1",
-      tema: "Variables y Tipos de datos",
-      descripcion:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dolor vitae felis tempus consequat. Integer accumsan convallis tellus vitae ultrices. Vivamus maximus non mauris et porta. In id pharetra nibh, non mollis nunc. Nulla in interdum quam. Ut maximus ante nec turpis fermentum fringilla. Morbi laoreet ac dolor eu ornare. Vestibulum eu diam massa.",
-      enlace: "https://www.youtube.com/piogram",
-      enClase: true,
-      ubicacion: new Ubicacion(
-        id: "1",
-        codigo: "YT",
-        nombre: "Youtube",
-      ),
-      sesion: new Sesion(
-        dia: 1,
-        horaInicio: 9,
-        minutoInicio: 0,
-        horaFin: 11,
-        minutoFin: 0,
-        ayudantia: new Ayudantia(
-          materia: new Materia(
-            nombre: "Fundamentos de Programación",
-            codigo: "CCPG1043",
-          ),
-          usuario: new Usuario(
-            email: "joealalv@espol.edu.ec",
-            nombre: "Joel Alejandro Alvarado Jimenez",
-          ),
-        ),
-      ),
-    );
+    // final Clase clase = new Clase(
+    //   id: "1",
+    //   tema: "Variables y Tipos de datos",
+    //   descripcion:
+    //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dolor vitae felis tempus consequat. Integer accumsan convallis tellus vitae ultrices. Vivamus maximus non mauris et porta. In id pharetra nibh, non mollis nunc. Nulla in interdum quam. Ut maximus ante nec turpis fermentum fringilla. Morbi laoreet ac dolor eu ornare. Vestibulum eu diam massa.",
+    //   enlace: "https://www.youtube.com/piogram",
+    //   enClase: true,
+    //   ubicacion: new Ubicacion(
+    //     id: "1",
+    //     codigo: "YT",
+    //     nombre: "Youtube",
+    //   ),
+    //   sesion: new Sesion(
+    //     dia: 1,
+    //     horaInicio: 9,
+    //     minutoInicio: 0,
+    //     horaFin: 11,
+    //     minutoFin: 0,
+    //     ayudantia: new Ayudantia(
+    //       materia: new Materia(
+    //         nombre: "Fundamentos de Programación",
+    //         codigo: "CCPG1043",
+    //       ),
+    //       usuario: new Usuario(
+    //         email: "joealalv@espol.edu.ec",
+    //         nombre: "Joel Alejandro Alvarado Jimenez",
+    //       ),
+    //     ),
+    //   ),
+    // );
 
     return Scaffold(
       appBar: AppBar(

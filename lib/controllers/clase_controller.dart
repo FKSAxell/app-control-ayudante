@@ -1,5 +1,6 @@
 import 'package:app_control_ayudante/global/environment.dart';
 import 'package:app_control_ayudante/models/clase_model.dart';
+import 'package:app_control_ayudante/response/clase_por_id_response.dart';
 import 'package:app_control_ayudante/response/clases_hoy_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -42,6 +43,28 @@ class ClaseController extends GetxController {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Future<Clase> obtenerClasePorId(String idClase) async {
+    final token = await AuthController.getToken();
+    final resp = await http.get(
+      Uri.parse('${Enviroment.apiUrl}/clase/$idClase'),
+      headers: {
+        'Content-type': 'application/json',
+        'x-token': token!,
+      },
+    );
+    this.loadingEnClase.value = true;
+    if (resp.statusCode == 200) {
+      final clasePorIdResponse = clasePorIdResponseFromJson(resp.body);
+      if (clasePorIdResponse.ok) {
+        return clasePorIdResponse.clase!;
+      }
+      return new Clase(); //TODO: OJO ERROR
+
+    } else {
+      return new Clase();
     }
   }
 }

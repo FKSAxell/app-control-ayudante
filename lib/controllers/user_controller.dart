@@ -10,5 +10,6 @@ class UserController extends GetxController {
     nombre: '',
     rol: [],
     id: '',
+    foto: '',
   ).obs;
 }
